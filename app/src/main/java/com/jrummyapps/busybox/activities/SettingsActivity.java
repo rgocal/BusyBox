@@ -17,13 +17,17 @@
 
 package com.jrummyapps.busybox.activities;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import com.jrummyapps.android.preferences.activities.MainPreferenceActivity;
+import com.jrummyapps.android.preferences.fragments.AboutPreferenceFragment;
 import com.jrummyapps.busybox.R;
 import com.jrummyapps.busybox.fragments.AboutFragment;
 import com.jrummyapps.busybox.fragments.SettingsFragment;
+import com.jrummyapps.sweetsweetdesserts.DessertCase;
 
-public class SettingsActivity extends MainPreferenceActivity  {
+public class SettingsActivity extends MainPreferenceActivity implements AboutPreferenceFragment.EasterEggCallback {
 
   @Override protected Fragment getFragment(int position) {
     int stringId = getStringId(position);
@@ -33,6 +37,10 @@ public class SettingsActivity extends MainPreferenceActivity  {
       return new AboutFragment();
     }
     return super.getFragment(position);
+  }
+
+  @Override public void onRequestEgg(Activity activity, int count) {
+    startActivity(new Intent(activity, DessertCase.class));
   }
 
 }

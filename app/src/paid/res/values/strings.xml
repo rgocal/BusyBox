@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">BusyBox Pro</string>
+  <string name="activity_busybox_installer">BusyBox Pro</string>
+</resources>

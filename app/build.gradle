@@ -2,7 +2,7 @@ import java.text.SimpleDateFormat
 
 def versionMajor = 6
 def versionMinor = 7
-def versionPatch = 1
+def versionPatch = 3
 def versionBuild = 0
 def versionSuffix = versionBuild > 0 ? "-beta" : ""
 
@@ -69,6 +69,7 @@ dependencies {
   freeCompile 'com.google.firebase:firebase-ads:10.0.1'
   freeCompile 'com.anjlab.android.iab.v3:library:1.0.32'
 
+  compile 'com.jrummyapps:sweetsweetdesserts:1.0.0'
   compile 'com.jaredrummler:material-spinner:1.0.9'
   compile 'com.jaredrummler:fastscroll-recyclerview:1.0.1'
   compile 'org.apache.commons:commons-compress:1.5'
