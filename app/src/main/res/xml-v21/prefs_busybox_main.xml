@@ -58,24 +58,24 @@
         android:key="primary_color"
         android:summary="@string/primary_color_summary"
         android:title="@string/primary_color"
-        app:dialogTitle="@string/primary_color"
-        app:previewSize="large"/>
+        app:cpv_dialogTitle="@string/primary_color"
+        app:cpv_previewSize="large"/>
     <com.jrummyapps.android.colorpicker.ColorPreference
         android:defaultValue="@color/color_accent_reference"
         android:key="accent_color"
         android:summary="@string/accent_color_summary"
         android:title="@string/accent_color"
-        app:dialogTitle="@string/accent_color"
-        app:previewSize="large"/>
+        app:cpv_dialogTitle="@string/accent_color"
+        app:cpv_previewSize="large"/>
     <com.jrummyapps.android.colorpicker.ColorPreference
         android:defaultValue="@color/background_material_light"
         android:key="background_color"
         android:summary="@string/background_color_summary"
         android:title="@string/background_color"
-        app:colorPresets="@array/background_color_presets"
-        app:dialogTitle="@string/background_color"
-        app:previewSize="large"
-        app:showColorShades="false"
+        app:cpv_colorPresets="@array/background_color_presets"
+        app:cpv_dialogTitle="@string/background_color"
+        app:cpv_previewSize="large"
+        app:cpv_showColorShades="false"
         tools:ignore="PrivateResource"/>
 
     <SwitchPreference
