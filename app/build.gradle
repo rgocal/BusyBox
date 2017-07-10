@@ -107,8 +107,8 @@ def initCrashlyticsPropertiesIfNeeded() {
     }
   } else {
     ant.propertyfile(file: "fabric.properties", comment: commentMessage) {
-      entry(key: "apiSecret", value: FILE_MANAGER_FABRIC_API_SECRET)
-      entry(key: "apiKey", value: FILE_MANAGER_FABRIC_API_KEY)
+      entry(key: "apiSecret", value: FABRIC_API_SECRET)
+      entry(key: "apiKey", value: FABRIC_API_KEY)
     }
   }
 }
