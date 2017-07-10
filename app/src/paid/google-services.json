@@ -1,0 +1,104 @@
+{
+  "project_info": {
+    "project_number": "131675545080",
+    "firebase_url": "https://busybox-for-android.firebaseio.com",
+    "project_id": "busybox-for-android",
+    "storage_bucket": "busybox-for-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:131675545080:android:6ef8da6ce43f40bc",
+        "android_client_info": {
+          "package_name": "com.jrummy.busybox.installer.pro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "131675545080-5ja0nsu16r8vtec2bjl97vs86ag2cvd7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDffHY0h2fJkoydQ5xH9MC5a3GMMQvH9N8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:131675545080:android:9fc0ea453231dc13",
+        "android_client_info": {
+          "package_name": "com.jrummyapps.busybox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "131675545080-5ja0nsu16r8vtec2bjl97vs86ag2cvd7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDffHY0h2fJkoydQ5xH9MC5a3GMMQvH9N8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:131675545080:android:a21dcba44f017cd4",
+        "android_client_info": {
+          "package_name": "com.jrummy.busybox.installer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "131675545080-5ja0nsu16r8vtec2bjl97vs86ag2cvd7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDffHY0h2fJkoydQ5xH9MC5a3GMMQvH9N8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
