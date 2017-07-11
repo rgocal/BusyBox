@@ -22,12 +22,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
@@ -49,7 +51,12 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
 
     InterstitialAd interstitialAd;
     BillingProcessor bp;
-    AdView adView;
+
+    private AdView[] adViewTiers;
+
+    private int currentAdViewIndex;
+
+    private RelativeLayout adContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +66,7 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
 
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-1915343032510958/9622649453");
 
-        adView = (AdView) findViewById(R.id.ad_view);
+        adContainer = (RelativeLayout) findViewById(R.id.ad_view);
         bp = new BillingProcessor(this, Monetize.decrypt(Monetize.ENCRYPTED_LICENSE_KEY), this);
 
         if (Prefs.getInstance().get("loaded_purchases_from_google", true)) {
@@ -68,36 +75,21 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
         }
 
         if (!Monetize.isAdsRemoved()) {
-            AdRequest adRequest;
-            if (App.isDebuggable()) {
-                adRequest = new AdRequest.Builder().addTestDevice(DeviceUtils.getDeviceId()).build();
-            } else {
-                adRequest = new AdRequest.Builder().build();
-            }
-            adView.setAdListener(new AdListener() {
-
-                @Override
-                public void onAdFailedToLoad(int errorCode) {
-                    if (adView.getVisibility() == View.VISIBLE) {
-                        Technique.SLIDE_OUT_DOWN.getComposer().hideOnFinished().playOn(adView);
-                    }
-                }
-
-                @Override
-                public void onAdLoaded() {
-                    adView.setVisibility(View.VISIBLE);
-                    Analytics.newEvent("on_ad_loaded").put("id", adView.getAdUnitId()).log();
-                }
-            });
-            adView.loadAd(adRequest);
+            currentAdViewIndex = 0;
+            adViewTiers = new AdView[getResources().getStringArray(R.array.banners_id).length];
+            setupBanners();
             loadInterstitialAd();
+        } else {
+            adContainer.setVisibility(View.GONE);
         }
     }
 
     @Override
     protected void onPause() {
-        if (adView != null) {
-            adView.pause();
+        for (AdView adView : adViewTiers) {
+            if (adView != null) {
+                adView.pause();
+            }
         }
         super.onPause();
     }
@@ -105,8 +97,10 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
     @Override
     protected void onResume() {
         super.onResume();
-        if (adView != null) {
-            adView.resume();
+        for (AdView adView : adViewTiers) {
+            if (adView != null) {
+                adView.resume();
+            }
         }
     }
 
@@ -117,8 +111,10 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
         if (bp != null) {
             bp.release();
         }
-        if (adView != null) {
-            adView.destroy();
+        for (AdView adView : adViewTiers) {
+            if (adView != null) {
+                adView.destroy();
+            }
         }
     }
 
@@ -243,4 +239,39 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
             }
         });
     }
+
+    private void setupBanners() {
+        AdRequest.Builder builder = new AdRequest.Builder();
+        if (App.isDebuggable()) {
+            builder.addTestDevice(DeviceUtils.getDeviceId());
+        }
+
+        adViewTiers[currentAdViewIndex] = new AdView(this);
+        adViewTiers[currentAdViewIndex].setAdSize(AdSize.SMART_BANNER);
+        adViewTiers[currentAdViewIndex]
+            .setAdUnitId(getResources().getStringArray(R.array.banners_id)[currentAdViewIndex]);
+        adViewTiers[currentAdViewIndex].setAdListener(new AdListener() {
+            @Override public void onAdFailedToLoad(int errorCode) {
+                if (currentAdViewIndex != (adViewTiers.length - 1)) {
+                    currentAdViewIndex++;
+                    setupBanners();
+                } else if (adContainer.getVisibility() == View.VISIBLE) {
+                    Technique.SLIDE_OUT_DOWN.getComposer().hideOnFinished().playOn(adContainer);
+                }
+            }
+
+            @Override public void onAdLoaded() {
+                adContainer.setVisibility(View.VISIBLE);
+                if (adContainer.getChildCount() != 0) {
+                    adContainer.removeAllViews();
+                }
+                adContainer.addView(adViewTiers[currentAdViewIndex]);
+                Analytics.newEvent("on_ad_loaded")
+                    .put("id", adViewTiers[currentAdViewIndex].getAdUnitId()).log();
+            }
+        });
+
+        adViewTiers[currentAdViewIndex].loadAd(builder.build());
+    }
+
 }
