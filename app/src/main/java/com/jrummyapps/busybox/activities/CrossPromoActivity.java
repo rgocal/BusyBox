@@ -13,12 +13,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import com.jrummyapps.android.radiant.activity.RadiantAppCompatActivity;
 import com.jrummyapps.android.util.Intents;
 import com.jrummyapps.android.widget.observablescrollview.ObservableGridView;
+import com.jrummyapps.busybox.BuildConfig;
+import com.jrummyapps.busybox.InstalledEventReceiver;
 import com.jrummyapps.busybox.R;
+import com.jrummyapps.busybox.adapters.AppListAdapter;
+import com.jrummyapps.busybox.models.RootAppInfo;
 
 import java.util.ArrayList;
+
+import static com.jrummyapps.busybox.InstalledEventReceiver.VERIFY_INSTALL_APP_DELAY_IN_MILLIS;
 
 public class CrossPromoActivity extends RadiantAppCompatActivity
         implements AppListAdapter.OnClickListener {
@@ -38,8 +47,7 @@ public class CrossPromoActivity extends RadiantAppCompatActivity
             actionBar.setDisplayShowHomeEnabled(true);
             actionBar.setDisplayUseLogoEnabled(false);
             actionBar.setHomeButtonEnabled(true);
-            actionBar.setIcon(R.drawable.fontfix_logo_words);
-            actionBar.setTitle(null);
+            actionBar.setTitle(R.string.app_name);
         }
 
         initRemoteConfig();
