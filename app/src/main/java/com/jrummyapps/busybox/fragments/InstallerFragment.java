@@ -54,6 +54,7 @@ import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
 import com.crashlytics.android.Crashlytics;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.jaredrummler.materialspinner.MaterialSpinner.OnItemSelectedListener;
@@ -93,25 +94,27 @@ import com.jrummyapps.android.util.ResUtils;
 import com.jrummyapps.android.util.Toasts;
 import com.jrummyapps.busybox.R;
 import com.jrummyapps.busybox.activities.AboutActivity;
-import com.jrummyapps.busybox.activities.SettingsActivity;
 import com.jrummyapps.busybox.dialogs.BusyboxSuccessDialog;
 import com.jrummyapps.busybox.dialogs.CreateZipDialog;
 import com.jrummyapps.busybox.models.BinaryInfo;
-import com.jrummyapps.busybox.utils.Monetize;
 import com.jrummyapps.busybox.tasks.BusyBoxFinder;
 import com.jrummyapps.busybox.tasks.BusyBoxMetaTask;
 import com.jrummyapps.busybox.tasks.DiskUsageTask;
 import com.jrummyapps.busybox.tasks.Installer;
 import com.jrummyapps.busybox.tasks.Uninstaller;
 import com.jrummyapps.busybox.utils.BusyBoxZipHelper;
+import com.jrummyapps.busybox.utils.Monetize;
 import com.jrummyapps.busybox.utils.Utils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
+
 import static com.jrummyapps.android.util.Intents.isIntentAvailable;
 
 public class InstallerFragment extends RadiantSupportFragment implements
@@ -290,10 +293,7 @@ public class InstallerFragment extends RadiantSupportFragment implements
 
   @Override public boolean onOptionsItemSelected(MenuItem item) {
     int itemId = item.getItemId();
-    if (itemId == R.id.action_settings) {
-      startActivity(new Intent(getActivity(), SettingsActivity.class));
-      return true;
-    } else if (itemId == R.id.action_terminal) {
+    if (itemId == R.id.action_terminal) {
       openTerminal();
       return true;
     } else if (itemId == R.id.action_zip_archive) {
@@ -452,7 +452,6 @@ public class InstallerFragment extends RadiantSupportFragment implements
 
     Analytics.newEvent("successfully_installed_busybox")
         .put("is_ads_removed", String.valueOf(Monetize.isAdsRemoved()))
-        .put("pro_version", String.valueOf(Monetize.isProVersion()))
         .put("path", busybox.path)
         .log();
 

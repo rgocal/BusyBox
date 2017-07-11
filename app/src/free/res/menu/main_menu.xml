@@ -30,10 +30,4 @@
       android:title="@string/remove_ads"
       app:showAsAction="never"/>
 
-  <item
-      android:id="@+id/action_unlock_premium"
-      android:icon="@drawable/ic_google_play_white_24dp"
-      android:title="@string/pro_version"
-      app:showAsAction="never"/>
-
 </menu>

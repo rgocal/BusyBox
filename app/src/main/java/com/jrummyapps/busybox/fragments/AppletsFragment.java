@@ -30,6 +30,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.jaredrummler.fastscrollrecyclerview.FastScrollRecyclerView;
 import com.jrummyapps.android.app.ActivityMonitor;
 import com.jrummyapps.android.radiant.fragments.RadiantSupportFragment;
@@ -37,9 +38,9 @@ import com.jrummyapps.android.widget.jazzylistview.JazzyHelper;
 import com.jrummyapps.android.widget.jazzylistview.JazzyRecyclerViewScrollListener;
 import com.jrummyapps.busybox.R;
 import com.jrummyapps.busybox.activities.AboutActivity;
-import com.jrummyapps.busybox.activities.SettingsActivity;
 import com.jrummyapps.busybox.dialogs.AppletUsageDialog;
 import com.jrummyapps.busybox.utils.Utils;
+
 import java.util.List;
 import java.util.Locale;
 
@@ -75,10 +76,7 @@ public class AppletsFragment extends RadiantSupportFragment {
 
   @Override public boolean onOptionsItemSelected(MenuItem item) {
     int itemId = item.getItemId();
-    if (itemId == R.id.action_settings) {
-      startActivity(new Intent(getActivity(), SettingsActivity.class));
-      return true;
-    } else if (itemId == R.id.action_info) {
+    if (itemId == R.id.action_info) {
       startActivity(new Intent(getActivity(), AboutActivity.class));
       return true;
     } else {

@@ -40,6 +40,7 @@ import com.jrummyapps.busybox.R;
 import com.jrummyapps.busybox.fragments.AppletsFragment;
 import com.jrummyapps.busybox.fragments.InstallerFragment;
 import com.jrummyapps.busybox.fragments.ScriptsFragment;
+
 import static com.jrummyapps.android.app.App.getContext;
 import static com.jrummyapps.busybox.utils.FragmentUtils.getCurrentFragment;
 
@@ -47,7 +48,7 @@ public class MainActivity extends RadiantAppCompatActivity implements
     DirectoryPickerDialog.OnDirectorySelectedListener,
     DirectoryPickerDialog.OnDirectoryPickerCancelledListener {
 
-  private ViewPager viewPager;
+  public ViewPager viewPager;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -63,7 +64,6 @@ public class MainActivity extends RadiantAppCompatActivity implements
     tabLayout.setupWithViewPager(viewPager);
     viewPager.setCurrentItem(1);
   }
-
   @Override public boolean onCreateOptionsMenu(Menu menu) {
     MenuInflater menuInflater = getMenuInflater();
     menuInflater.inflate(R.menu.main_menu, menu);
@@ -77,8 +77,12 @@ public class MainActivity extends RadiantAppCompatActivity implements
 
   @Override public boolean onOptionsItemSelected(MenuItem item) {
     int itemId = item.getItemId();
-    if (itemId == R.id.action_promo) {
+    if (itemId == R.id.action_settings) {
+      startActivity(new Intent(this, SettingsActivity.class));
+      return true;
+    } else if (itemId == R.id.action_promo) {
       startActivity(new Intent(this, CrossPromoActivity.class));
+      return true;
     }
     return super.onOptionsItemSelected(item);
   }
