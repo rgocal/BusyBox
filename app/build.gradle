@@ -87,6 +87,9 @@ dependencies {
   compile 'com.jrummyapps:morphing-dialog:1.0.0'
   compile 'com.jrummyapps:html-builder:1.0.1'
   compile 'com.jrummyapps:legacy-obfuscate:1.0.0'
+
+  /* Remote Config */
+  compile 'com.google.firebase:firebase-config:10.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'
