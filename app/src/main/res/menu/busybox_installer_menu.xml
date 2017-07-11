@@ -27,6 +27,12 @@
       app:showAsAction="always"/>
 
   <item
+      android:id="@+id/action_promo"
+      android:icon="@drawable/ic_shop_two_white_24dp"
+      android:title="@string/promo"
+      app:showAsAction="always|collapseActionView" />
+
+  <item
       android:id="@+id/action_settings"
       android:icon="@drawable/ic_settings_white_24dp"
       android:title="@string/settings"

@@ -41,6 +41,7 @@
   <string name="profile">Profile</string>
   <string name="pro_version">Pro version</string>
   <string name="remove_ads">Remove ads</string>
+  <string name="promo">Promo</string>
 
   <!-- PREFERENCES -->
   <string name="replace_existing_applets">Replace existing applets</string>
