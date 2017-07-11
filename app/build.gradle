@@ -12,10 +12,13 @@ def versionSuffix = versionBuild > 0 ? "-beta" : ""
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
+repositories {
+  maven { url 'https://maven.fabric.io/public' }
+}
 
 android {
   compileSdkVersion 25
-  buildToolsVersion '25.0.0'
+  buildToolsVersion "24.0.3"
 
   productFlavors {
     free {
@@ -65,10 +68,6 @@ android {
       signingConfig signingConfigs.release
     }
   }
-}
-
-repositories {
-  maven { url 'https://maven.fabric.io/public' }
 }
 
 dependencies {
