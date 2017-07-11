@@ -19,6 +19,7 @@ package com.jrummy.busybox.installer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,6 +41,7 @@ import com.jrummyapps.android.prefs.Prefs;
 import com.jrummyapps.android.util.DeviceUtils;
 import com.jrummyapps.android.util.Jot;
 import com.jrummyapps.busybox.R;
+import com.jrummyapps.busybox.activities.SettingsActivity;
 import com.jrummyapps.busybox.utils.Monetize;
 
 import org.greenrobot.eventbus.EventBus;
@@ -47,9 +49,9 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
-        implements BillingProcessor.IBillingHandler {
+    implements BillingProcessor.IBillingHandler {
 
-    InterstitialAd interstitialAd;
+    InterstitialAd   interstitialAd;
     BillingProcessor bp;
 
     private AdView[] adViewTiers;
@@ -58,8 +60,10 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
 
     private RelativeLayout adContainer;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    private InterstitialAd[] interstitialsTabAd;
+    private InterstitialAd[] interstitialsSettingsAd;
+
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         EventBus.getDefault().register(this);
@@ -79,6 +83,27 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
             adViewTiers = new AdView[getResources().getStringArray(R.array.banners_id).length];
             setupBanners();
             loadInterstitialAd();
+
+            viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                }
+
+                @Override public void onPageSelected(int position) {
+                    showTabInterstitials();
+                }
+
+                @Override public void onPageScrollStateChanged(int state) {
+                }
+            });
+
+            interstitialsTabAd = new InterstitialAd[getResources()
+                .getStringArray(R.array.tabs_interstitials_id).length];
+            interstitialsSettingsAd = new InterstitialAd[getResources()
+                .getStringArray(R.array.settings_interstitials_id).length];
+
+            setupTabInterstitialsAd();
+            setupSettingsInterstitialsAd();
         } else {
             adContainer.setVisibility(View.GONE);
         }
@@ -138,10 +163,12 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
         return super.onPrepareOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
-        if (itemId == R.id.action_remove_ads) {
+        if (itemId == R.id.action_settings) {
+            showSettingsInterstitials();
+            return true;
+        } else if (itemId == R.id.action_remove_ads) {
             Analytics.newEvent("remove ads menu item").log();
             onEventMainThread(new Monetize.Event.RequestRemoveAds());
             return true;
@@ -252,6 +279,83 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
         });
 
         adViewTiers[currentAdViewIndex].loadAd(builder.build());
+    }
+
+    private void showTabInterstitials() {
+        for (InterstitialAd interstitialAd : interstitialsTabAd) {
+            if (interstitialIsReady(interstitialAd)) {
+                interstitialAd.show();
+                return;
+            }
+        }
+    }
+
+    private void showSettingsInterstitials() {
+        for (InterstitialAd interstitialAd : interstitialsSettingsAd) {
+            if (interstitialIsReady(interstitialAd)) {
+                interstitialAd.show();
+                return;
+            }
+        }
+        startActivity(new Intent(this, SettingsActivity.class));
+    }
+
+    private void setupTabInterstitialsAd() {
+        for (int i = 0; i < interstitialsTabAd.length; i++) {
+            if (!interstitialIsReady(interstitialsTabAd[i])) {
+                newTabInterstitialAd(i, getResources().getStringArray(R.array.tabs_interstitials_id)[i]);
+            }
+        }
+    }
+
+    private void setupSettingsInterstitialsAd() {
+        for (int i = 0; i < interstitialsSettingsAd.length; i++) {
+            if (!interstitialIsReady(interstitialsSettingsAd[i])) {
+                newSettingsInterstitialAd(i, getResources()
+                    .getStringArray(R.array.settings_interstitials_id)[i]);
+            }
+        }
+    }
+
+    private void newTabInterstitialAd(final int position, String placementId) {
+        interstitialsTabAd[position] = new InterstitialAd(this);
+        interstitialsTabAd[position].setAdListener(new AdListener() {
+            @Override public void onAdClosed() {
+                super.onAdClosed();
+                interstitialsTabAd[position] = null;
+                setupTabInterstitialsAd();
+            }
+        });
+        interstitialsTabAd[position].setAdUnitId(placementId);
+        interstitialsTabAd[position].loadAd(getAdRequest());
+    }
+
+    private void newSettingsInterstitialAd(final int position, String placementId) {
+        interstitialsSettingsAd[position] = new InterstitialAd(this);
+        interstitialsSettingsAd[position].setAdListener(new AdListener() {
+            @Override public void onAdClosed() {
+                super.onAdClosed();
+                interstitialsSettingsAd[position] = null;
+                setupSettingsInterstitialsAd();
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+            }
+        });
+        interstitialsSettingsAd[position].setAdUnitId(placementId);
+        interstitialsSettingsAd[position].loadAd(getAdRequest());
+    }
+
+    private boolean interstitialIsReady(InterstitialAd interstitialAd) {
+        return interstitialAd != null && interstitialAd.isLoaded();
+    }
+
+    private AdRequest getAdRequest() {
+        AdRequest adRequest;
+        if (App.isDebuggable()) {
+            adRequest = new AdRequest.Builder().addTestDevice(DeviceUtils.getDeviceId()).build();
+        } else {
+            adRequest = new AdRequest.Builder().build();
+        }
+        return adRequest;
     }
 
 }

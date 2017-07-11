@@ -26,6 +26,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+
 import com.jrummyapps.android.directorypicker.DirectoryPickerDialog;
 import com.jrummyapps.android.exceptions.NotImplementedException;
 import com.jrummyapps.android.files.LocalFile;
@@ -36,6 +38,7 @@ import com.jrummyapps.busybox.R;
 import com.jrummyapps.busybox.fragments.AppletsFragment;
 import com.jrummyapps.busybox.fragments.InstallerFragment;
 import com.jrummyapps.busybox.fragments.ScriptsFragment;
+
 import static com.jrummyapps.android.app.App.getContext;
 import static com.jrummyapps.busybox.utils.FragmentUtils.getCurrentFragment;
 
@@ -43,7 +46,7 @@ public class MainActivity extends RadiantAppCompatActivity implements
     DirectoryPickerDialog.OnDirectorySelectedListener,
     DirectoryPickerDialog.OnDirectoryPickerCancelledListener {
 
-  private ViewPager viewPager;
+  public ViewPager viewPager;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -58,6 +61,14 @@ public class MainActivity extends RadiantAppCompatActivity implements
     viewPager.setAdapter(pagerAdapter);
     tabLayout.setupWithViewPager(viewPager);
     viewPager.setCurrentItem(1);
+  }
+
+  @Override public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == R.id.action_settings) {
+      startActivity(new Intent(this, SettingsActivity.class));
+      return true;
+    }
+    return super.onOptionsItemSelected(item);
   }
 
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
