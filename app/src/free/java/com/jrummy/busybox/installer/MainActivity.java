@@ -48,9 +48,9 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
-        implements BillingProcessor.IBillingHandler {
+    implements BillingProcessor.IBillingHandler {
 
-    InterstitialAd interstitialAd;
+    InterstitialAd   interstitialAd;
     BillingProcessor bp;
 
     private AdView[] adViewTiers;
@@ -59,11 +59,11 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
 
     private RelativeLayout adContainer;
 
-  private InterstitialAd[] interstitialsTabAd;
-  private InterstitialAd[] interstitialsSettingsAd;
+    private InterstitialAd[] interstitialsTabAd;
+    private InterstitialAd[] interstitialsSettingsAd;
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+    @Override protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         EventBus.getDefault().register(this);
 
@@ -163,22 +163,22 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
         return super.onPrepareOptionsMenu(menu);
     }
 
-  @Override public boolean onOptionsItemSelected(MenuItem item) {
-    int itemId = item.getItemId();
-    if (itemId == R.id.action_settings) {
-      showSettingsInterstitials();
-      return true;
-    } else if (itemId == R.id.action_remove_ads) {
-      Analytics.newEvent("remove ads menu item").log();
-      onEventMainThread(new Monetize.Event.RequestRemoveAds());
-      return true;
-    } else if (itemId == R.id.action_unlock_premium) {
-      Analytics.newEvent("pre version menu item").log();
-      onEventMainThread(new Monetize.Event.RequestPremiumEvent());
-      return true;
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.action_settings) {
+            showSettingsInterstitials();
+            return true;
+        } else if (itemId == R.id.action_remove_ads) {
+            Analytics.newEvent("remove ads menu item").log();
+            onEventMainThread(new Monetize.Event.RequestRemoveAds());
+            return true;
+        } else if (itemId == R.id.action_unlock_premium) {
+            Analytics.newEvent("pre version menu item").log();
+            onEventMainThread(new Monetize.Event.RequestPremiumEvent());
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
-    return super.onOptionsItemSelected(item);
-  }
 
     @Override
     public void onProductPurchased(String productId, TransactionDetails details) {

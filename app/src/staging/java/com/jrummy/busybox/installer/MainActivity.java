@@ -23,12 +23,14 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
@@ -51,7 +53,12 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
 
     InterstitialAd   interstitialAd;
     BillingProcessor bp;
-    AdView           adView;
+
+    private AdView[] adViewTiers;
+
+    private int currentAdViewIndex;
+
+    private RelativeLayout adContainer;
 
     private InterstitialAd[] interstitialsTabAd;
     private InterstitialAd[] interstitialsSettingsAd;
@@ -63,7 +70,7 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
 
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-1915343032510958/9622649453");
 
-        adView = (AdView) findViewById(R.id.ad_view);
+        adContainer = (RelativeLayout) findViewById(R.id.ad_view);
         bp = new BillingProcessor(this, Monetize.decrypt(Monetize.ENCRYPTED_LICENSE_KEY), this);
 
         if (Prefs.getInstance().get("loaded_purchases_from_google", true)) {
@@ -72,26 +79,9 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
         }
 
         if (!Monetize.isAdsRemoved()) {
-            AdRequest adRequest;
-            if (App.isDebuggable()) {
-                adRequest = new AdRequest.Builder().addTestDevice(DeviceUtils.getDeviceId()).build();
-            } else {
-                adRequest = new AdRequest.Builder().build();
-            }
-            adView.setAdListener(new AdListener() {
-
-                @Override public void onAdFailedToLoad(int errorCode) {
-                    if (adView.getVisibility() == View.VISIBLE) {
-                        Technique.SLIDE_OUT_DOWN.getComposer().hideOnFinished().playOn(adView);
-                    }
-                }
-
-                @Override public void onAdLoaded() {
-                    adView.setVisibility(View.VISIBLE);
-                    Analytics.newEvent("on_ad_loaded").put("id", adView.getAdUnitId()).log();
-                }
-            });
-            adView.loadAd(adRequest);
+            currentAdViewIndex = 0;
+            adViewTiers = new AdView[getResources().getStringArray(R.array.banners_id).length];
+            setupBanners();
             loadInterstitialAd();
 
             viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -114,47 +104,61 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
 
             setupTabInterstitialsAd();
             setupSettingsInterstitialsAd();
+        } else {
+            adContainer.setVisibility(View.GONE);
         }
     }
 
-    @Override protected void onPause() {
-        if (adView != null) {
-            adView.pause();
+    @Override
+    protected void onPause() {
+        for (AdView adView : adViewTiers) {
+            if (adView != null) {
+                adView.pause();
+            }
         }
         super.onPause();
     }
 
-    @Override protected void onResume() {
+    @Override
+    protected void onResume() {
         super.onResume();
-        if (adView != null) {
-            adView.resume();
+        for (AdView adView : adViewTiers) {
+            if (adView != null) {
+                adView.resume();
+            }
         }
     }
 
-    @Override public void onDestroy() {
+    @Override
+    public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
         if (bp != null) {
             bp.release();
         }
-        if (adView != null) {
-            adView.destroy();
+        for (AdView adView : adViewTiers) {
+            if (adView != null) {
+                adView.destroy();
+            }
         }
     }
 
-    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (bp.handleActivityResult(requestCode, resultCode, data)) {
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override public boolean onPrepareOptionsMenu(Menu menu) {
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.action_remove_ads).setVisible(!Monetize.isAdsRemoved());
         menu.findItem(R.id.action_unlock_premium).setVisible(!Monetize.isProVersion());
         return super.onPrepareOptionsMenu(menu);
@@ -177,7 +181,8 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @Override public void onProductPurchased(String productId, TransactionDetails details) {
+    @Override
+    public void onProductPurchased(String productId, TransactionDetails details) {
         // Called when requested PRODUCT ID was successfully purchased
         Analytics.newEvent("in-app purchase").put("product_id", productId).log();
         if (productId.equals(Monetize.decrypt(Monetize.ENCRYPTED_PRO_VERSION_PRODUCT_ID))) {
@@ -191,18 +196,21 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
         }
     }
 
-    @Override public void onPurchaseHistoryRestored() {
+    @Override
+    public void onPurchaseHistoryRestored() {
         // Called when requested PRODUCT ID was successfully purchased
         Jot.d("Restored purchases");
     }
 
-    @Override public void onBillingError(int errorCode, Throwable error) {
+    @Override
+    public void onBillingError(int errorCode, Throwable error) {
         // Called when some error occurred. See Constants class for more details
         Analytics.newEvent("billing error").put("error_code", errorCode).log();
         Crashlytics.logException(error);
     }
 
-    @Override public void onBillingInitialized() {
+    @Override
+    public void onBillingInitialized() {
         // Called when BillingProcessor was initialized and it's ready to purchase
     }
 
@@ -248,7 +256,8 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
         }
         interstitialAd.setAdListener(new AdListener() {
 
-            @Override public void onAdClosed() {
+            @Override
+            public void onAdClosed() {
                 if (App.isDebuggable()) {
                     interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(DeviceUtils.getDeviceId()).build());
                 } else {
@@ -256,6 +265,40 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
                 }
             }
         });
+    }
+
+    private void setupBanners() {
+        AdRequest.Builder builder = new AdRequest.Builder();
+        if (App.isDebuggable()) {
+            builder.addTestDevice(DeviceUtils.getDeviceId());
+        }
+
+        adViewTiers[currentAdViewIndex] = new AdView(this);
+        adViewTiers[currentAdViewIndex].setAdSize(AdSize.SMART_BANNER);
+        adViewTiers[currentAdViewIndex]
+            .setAdUnitId(getResources().getStringArray(R.array.banners_id)[currentAdViewIndex]);
+        adViewTiers[currentAdViewIndex].setAdListener(new AdListener() {
+            @Override public void onAdFailedToLoad(int errorCode) {
+                if (currentAdViewIndex != (adViewTiers.length - 1)) {
+                    currentAdViewIndex++;
+                    setupBanners();
+                } else if (adContainer.getVisibility() == View.VISIBLE) {
+                    Technique.SLIDE_OUT_DOWN.getComposer().hideOnFinished().playOn(adContainer);
+                }
+            }
+
+            @Override public void onAdLoaded() {
+                adContainer.setVisibility(View.VISIBLE);
+                if (adContainer.getChildCount() != 0) {
+                    adContainer.removeAllViews();
+                }
+                adContainer.addView(adViewTiers[currentAdViewIndex]);
+                Analytics.newEvent("on_ad_loaded")
+                    .put("id", adViewTiers[currentAdViewIndex].getAdUnitId()).log();
+            }
+        });
+
+        adViewTiers[currentAdViewIndex].loadAd(builder.build());
     }
 
     private void showTabInterstitials() {
