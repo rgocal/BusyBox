@@ -25,6 +25,12 @@
     <item>ca-app-pub-4229758926684576/2033201443</item>
   </string-array>
 
+  <string-array name="settings_interstitials_id">
+    <item>ca-app-pub-4229758926684576/6463401044</item>
+    <item>ca-app-pub-4229758926684576/7940134248</item>
+    <item>ca-app-pub-4229758926684576/9416867444</item>
+  </string-array>
+
   <string name="website_main">http://jrummyapps.com</string>
   <string name="website_faqs">http://support.jrummyapps.com/knowledge-base/faqs/busybox-for-android</string>
   <string name="website_tutorial">http://busybox.jrummyapps.com/#faq</string>

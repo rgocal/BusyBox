@@ -26,18 +26,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.jrummyapps.android.app.App;
 import com.jrummyapps.android.directorypicker.DirectoryPickerDialog;
 import com.jrummyapps.android.exceptions.NotImplementedException;
 import com.jrummyapps.android.files.LocalFile;
 import com.jrummyapps.android.files.external.ExternalStorageHelper;
 import com.jrummyapps.android.permiso.Permiso;
 import com.jrummyapps.android.radiant.activity.RadiantAppCompatActivity;
-import com.jrummyapps.android.util.DeviceUtils;
 import com.jrummyapps.busybox.R;
 import com.jrummyapps.busybox.fragments.AppletsFragment;
 import com.jrummyapps.busybox.fragments.InstallerFragment;
@@ -50,8 +46,7 @@ public class MainActivity extends RadiantAppCompatActivity implements
     DirectoryPickerDialog.OnDirectorySelectedListener,
     DirectoryPickerDialog.OnDirectoryPickerCancelledListener {
 
-  private ViewPager        viewPager;
-  private InterstitialAd[] interstitialsAd;
+  public ViewPager viewPager;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -66,23 +61,14 @@ public class MainActivity extends RadiantAppCompatActivity implements
     viewPager.setAdapter(pagerAdapter);
     tabLayout.setupWithViewPager(viewPager);
     viewPager.setCurrentItem(1);
+  }
 
-    viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-      @Override
-      public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-      }
-
-      @Override public void onPageSelected(int position) {
-        showInterstitials();
-      }
-
-      @Override public void onPageScrollStateChanged(int state) {
-      }
-    });
-
-    interstitialsAd = new InterstitialAd[getResources()
-        .getStringArray(R.array.tabs_interstitials_id).length];
-    setupInterstitialsAd();
+  @Override public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == R.id.action_settings) {
+      startActivity(new Intent(this, SettingsActivity.class));
+      return true;
+    }
+    return super.onOptionsItemSelected(item);
   }
 
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -157,51 +143,6 @@ public class MainActivity extends RadiantAppCompatActivity implements
       return titles[position];
     }
 
-  }
-
-  private void showInterstitials() {
-    for (InterstitialAd interstitialAd : interstitialsAd) {
-      if (interstitialIsReady(interstitialAd)) {
-        interstitialAd.show();
-        return;
-      }
-    }
-  }
-
-  private void setupInterstitialsAd() {
-    for (int i = 0; i < interstitialsAd.length; i++) {
-      if (!interstitialIsReady(interstitialsAd[i])) {
-        newInterstitialAd(i, getResources().getStringArray(R.array.tabs_interstitials_id)[i]);
-      }
-    }
-  }
-
-  private void newInterstitialAd(final int position, String placementId) {
-    interstitialsAd[position] = new InterstitialAd(this);
-    interstitialsAd[position].setAdListener(new AdListener() {
-      @Override public void onAdClosed() {
-        super.onAdClosed();
-        interstitialsAd[position] = null;
-        setupInterstitialsAd();
-      }
-    }
-    );
-    interstitialsAd[position].setAdUnitId(placementId);
-    interstitialsAd[position].loadAd(getAdRequest());
-  }
-
-  private boolean interstitialIsReady(InterstitialAd interstitialAd) {
-    return interstitialAd != null && interstitialAd.isLoaded();
-  }
-
-  private AdRequest getAdRequest() {
-    AdRequest adRequest;
-    if (App.isDebuggable()) {
-      adRequest = new AdRequest.Builder().addTestDevice(DeviceUtils.getDeviceId()).build();
-    } else {
-      adRequest = new AdRequest.Builder().build();
-    }
-    return adRequest;
   }
 
 }

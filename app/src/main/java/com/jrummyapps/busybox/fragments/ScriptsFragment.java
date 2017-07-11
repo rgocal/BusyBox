@@ -39,6 +39,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+
 import com.crashlytics.android.Crashlytics;
 import com.jrummyapps.android.analytics.Analytics;
 import com.jrummyapps.android.fileproperties.activities.FilePropertiesActivity;
@@ -52,7 +53,6 @@ import com.jrummyapps.android.widget.jazzylistview.JazzyListView;
 import com.jrummyapps.busybox.R;
 import com.jrummyapps.busybox.activities.AboutActivity;
 import com.jrummyapps.busybox.activities.CreateScriptActivity;
-import com.jrummyapps.busybox.activities.SettingsActivity;
 import com.jrummyapps.busybox.database.Database;
 import com.jrummyapps.busybox.database.ShellScriptTable;
 import com.jrummyapps.busybox.dialogs.CreateScriptDialog;
@@ -60,12 +60,14 @@ import com.jrummyapps.busybox.models.ShellScript;
 import com.jrummyapps.busybox.tasks.ScriptLoader;
 import com.jrummyapps.texteditor.activities.TextEditorActivity;
 import com.jrummyapps.texteditor.shell.activities.ScriptExecutorActivity;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class ScriptsFragment extends RadiantSupportFragment
     implements AdapterView.OnItemClickListener, View.OnClickListener {
@@ -128,10 +130,7 @@ public class ScriptsFragment extends RadiantSupportFragment
 
   @Override public boolean onOptionsItemSelected(MenuItem item) {
     int itemId = item.getItemId();
-    if (itemId == R.id.action_settings) {
-      startActivity(new Intent(getActivity(), SettingsActivity.class));
-      return true;
-    } else if (itemId == R.id.action_info) {
+    if (itemId == R.id.action_info) {
       startActivity(new Intent(getActivity(), AboutActivity.class));
       return true;
     } else {
