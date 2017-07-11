@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "670068035052",
+    "firebase_url": "https://busybox-dbba9.firebaseio.com",
+    "project_id": "busybox-dbba9",
+    "storage_bucket": "busybox-dbba9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:670068035052:android:93eb5252394b8676",
+        "android_client_info": {
+          "package_name": "com.jrummyapps.busybox.installer.staging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "670068035052-c69fp0toa2cqkif2mkr90v89fl7pfino.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyoKebMqMT1BIQciAEGX1GiuEtgz6rx0w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
