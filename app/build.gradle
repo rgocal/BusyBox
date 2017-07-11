@@ -72,10 +72,11 @@ android {
 
 dependencies {
   stagingCompile 'com.google.firebase:firebase-ads:10.0.1'
+  stagingCompile 'com.anjlab.android.iab.v3:library:1.0.32'
 
   freeCompile 'com.google.firebase:firebase-ads:10.0.1'
+  freeCompile 'com.anjlab.android.iab.v3:library:1.0.32'
 
-  compile 'com.anjlab.android.iab.v3:library:1.0.32'
   compile 'com.jrummyapps:sweetsweetdesserts:1.0.0'
   compile 'com.jaredrummler:material-spinner:1.0.9'
   compile 'com.jaredrummler:fastscroll-recyclerview:1.0.1'
