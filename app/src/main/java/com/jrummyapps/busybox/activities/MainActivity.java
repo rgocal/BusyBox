@@ -26,6 +26,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
 import com.jrummyapps.android.directorypicker.DirectoryPickerDialog;
 import com.jrummyapps.android.exceptions.NotImplementedException;
 import com.jrummyapps.android.files.LocalFile;
@@ -58,6 +62,25 @@ public class MainActivity extends RadiantAppCompatActivity implements
     viewPager.setAdapter(pagerAdapter);
     tabLayout.setupWithViewPager(viewPager);
     viewPager.setCurrentItem(1);
+  }
+
+  @Override public boolean onCreateOptionsMenu(Menu menu) {
+    MenuInflater menuInflater = getMenuInflater();
+    menuInflater.inflate(R.menu.main_menu, menu);
+    return super.onCreateOptionsMenu(menu);
+  }
+
+  @Override public boolean onPrepareOptionsMenu(Menu menu) {
+    menu.findItem(R.id.action_promo).setIcon(R.drawable.ic_shop_two_white_24dp);
+    return super.onPrepareOptionsMenu(menu);
+  }
+
+  @Override public boolean onOptionsItemSelected(MenuItem item) {
+    int itemId = item.getItemId();
+    if (itemId == R.id.action_promo) {
+      startActivity(new Intent(this, CrossPromoActivity.class));
+    }
+    return super.onOptionsItemSelected(item);
   }
 
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {

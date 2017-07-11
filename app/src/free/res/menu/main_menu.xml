@@ -19,6 +19,12 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <item
+      android:id="@+id/action_promo"
+      android:icon="@drawable/ic_shop_two_white_24dp"
+      android:title="@string/promo"
+      app:showAsAction="always|collapseActionView" />
+
+  <item
       android:id="@+id/action_remove_ads"
       android:icon="@drawable/ic_google_play_white_24dp"
       android:title="@string/remove_ads"

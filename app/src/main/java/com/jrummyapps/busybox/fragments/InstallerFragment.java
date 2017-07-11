@@ -93,7 +93,6 @@ import com.jrummyapps.android.util.ResUtils;
 import com.jrummyapps.android.util.Toasts;
 import com.jrummyapps.busybox.R;
 import com.jrummyapps.busybox.activities.AboutActivity;
-import com.jrummyapps.busybox.activities.CrossPromoActivity;
 import com.jrummyapps.busybox.activities.SettingsActivity;
 import com.jrummyapps.busybox.dialogs.BusyboxSuccessDialog;
 import com.jrummyapps.busybox.dialogs.CreateZipDialog;
@@ -289,11 +288,6 @@ public class InstallerFragment extends RadiantSupportFragment implements
     super.onCreateOptionsMenu(menu, inflater);
   }
 
-  @Override public void onPrepareOptionsMenu(Menu menu) {
-    super.onPrepareOptionsMenu(menu);
-    menu.findItem(R.id.action_promo).setIcon(R.drawable.ic_shop_two_white_24dp);
-  }
-
   @Override public boolean onOptionsItemSelected(MenuItem item) {
     int itemId = item.getItemId();
     if (itemId == R.id.action_settings) {
@@ -310,9 +304,6 @@ public class InstallerFragment extends RadiantSupportFragment implements
       return true;
     } else if (itemId == R.id.action_info) {
       startActivity(new Intent(getActivity(), AboutActivity.class));
-      return true;
-    } else if (itemId == R.id.action_promo) {
-      startActivity(new Intent(getActivity(), CrossPromoActivity.class));
       return true;
     } else {
       return super.onOptionsItemSelected(item);

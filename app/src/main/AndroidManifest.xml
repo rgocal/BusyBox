@@ -88,6 +88,12 @@
     <activity
         android:name="com.jrummyapps.busybox.activities.DeveloperProfileActivity"
         android:theme="@style/Radiant.Light.NoActionBar.MaterialDialog"/>
+
+    <activity android:name="com.jrummyapps.busybox.activities.CrossPromoActivity" />
+
+    <receiver
+        android:name="com.jrummyapps.busybox.InstalledEventReceiver"
+        android:exported="false" />
   </application>
 
 </manifest>

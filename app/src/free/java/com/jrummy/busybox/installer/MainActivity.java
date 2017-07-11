@@ -131,12 +131,6 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.action_remove_ads).setVisible(!Monetize.isAdsRemoved());
         menu.findItem(R.id.action_unlock_premium).setVisible(!Monetize.isProVersion());
