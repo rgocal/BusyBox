@@ -452,7 +452,6 @@ public class InstallerFragment extends RadiantSupportFragment implements
 
     Analytics.newEvent("successfully_installed_busybox")
         .put("is_ads_removed", String.valueOf(Monetize.isAdsRemoved()))
-        .put("pro_version", String.valueOf(Monetize.isProVersion()))
         .put("path", busybox.path)
         .log();
 

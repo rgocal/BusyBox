@@ -139,7 +139,6 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.action_remove_ads).setVisible(!Monetize.isAdsRemoved());
-        menu.findItem(R.id.action_unlock_premium).setVisible(!Monetize.isProVersion());
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -150,10 +149,6 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
             Analytics.newEvent("remove ads menu item").log();
             onEventMainThread(new Monetize.Event.RequestRemoveAds());
             return true;
-        } else if (itemId == R.id.action_unlock_premium) {
-            Analytics.newEvent("pre version menu item").log();
-            onEventMainThread(new Monetize.Event.RequestPremiumEvent());
-            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -162,12 +157,7 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
     public void onProductPurchased(String productId, TransactionDetails details) {
         // Called when requested PRODUCT ID was successfully purchased
         Analytics.newEvent("in-app purchase").put("product_id", productId).log();
-        if (productId.equals(Monetize.decrypt(Monetize.ENCRYPTED_PRO_VERSION_PRODUCT_ID))) {
-            Monetize.removeAds();
-            Monetize.unlockProVersion();
-            EventBus.getDefault().post(new Monetize.Event.OnAdsRemovedEvent());
-            EventBus.getDefault().post(new Monetize.Event.OnPurchasedPremiumEvent());
-        } else if (productId.equals(Monetize.decrypt(Monetize.ENCRYPTED_REMOVE_ADS_PRODUCT_ID))) {
+        if (productId.equals(Monetize.decrypt(Monetize.ENCRYPTED_REMOVE_ADS_PRODUCT_ID))) {
             Monetize.removeAds();
             EventBus.getDefault().post(new Monetize.Event.OnAdsRemovedEvent());
         }
@@ -203,16 +193,6 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
     public void onEventMainThread(Monetize.Event.OnAdsRemovedEvent event) {
         Technique.SLIDE_OUT_DOWN.getComposer().hideOnFinished().playOn(findViewById(R.id.ad_view));
         interstitialAd = null;
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(Monetize.Event.OnPurchasedPremiumEvent event) {
-
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(Monetize.Event.RequestPremiumEvent event) {
-        bp.purchase(this, Monetize.decrypt(Monetize.ENCRYPTED_PRO_VERSION_PRODUCT_ID));
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

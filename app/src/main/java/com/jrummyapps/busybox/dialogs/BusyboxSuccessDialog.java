@@ -35,15 +35,7 @@ public class BusyboxSuccessDialog extends DialogFragment {
         .setCancelable(false)
         .setTitle(R.string.success)
         .setMessage(R.string.install_success_message)
-        .setNegativeButton(R.string.pro_version, new DialogInterface.OnClickListener() {
-
-          @Override public void onClick(DialogInterface dialog, int which) {
-            dialog.dismiss();
-            EventBus.getDefault().post(new Monetize.Event.RequestPremiumEvent());
-            Analytics.newEvent("monetize_request_pro_version").put("prodcut", "pro_version").log();
-          }
-        })
-        .setNeutralButton(R.string.remove_ads, new DialogInterface.OnClickListener() {
+        .setNegativeButton(R.string.remove_ads, new DialogInterface.OnClickListener() {
 
           @Override public void onClick(DialogInterface dialog, int which) {
             dialog.dismiss();
