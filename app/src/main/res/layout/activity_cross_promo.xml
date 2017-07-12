@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relative_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <com.jrummyapps.android.widget.observablescrollview.ObservableGridView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="#00000000"
+        android:clipToPadding="false"
+        android:columnWidth="300dp"
+        android:divider="@null"
+        android:dividerHeight="4dp"
+        android:fastScrollEnabled="true"
+        android:numColumns="2"
+        android:paddingBottom="8dp"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        android:scrollbarStyle="outsideInset"
+        android:scrollbars="none"
+        android:verticalSpacing="2dp"
+        app:jazzy_effect="slide_in"
+        app:jazzy_max_velocity="0"
+        app:jazzy_only_animate_fling="false"
+        app:jazzy_only_animate_new_items="false"
+        />
+
+</RelativeLayout>

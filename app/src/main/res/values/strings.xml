@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+  <string name="app_name">BusyBox</string>
+
   <!-- SPINNER ITEMS -->
   <string name="choose_a_directory">Choose a directory…</string>
 
@@ -13,6 +15,7 @@
   <string name="root_required">Root required</string>
   <string name="create">Create</string>
   <string name="success">Success</string>
+  <string name="promo_download">Download</string>
 
   <!-- DIALOG TITLES -->
   <string name="confirm_before_deleting">Confirm before deleting</string>
@@ -41,6 +44,8 @@
   <string name="profile">Profile</string>
   <string name="pro_version">Pro version</string>
   <string name="remove_ads">Remove ads</string>
+  <string name="promo">Promo</string>
+
 
   <!-- PREFERENCES -->
   <string name="replace_existing_applets">Replace existing applets</string>
