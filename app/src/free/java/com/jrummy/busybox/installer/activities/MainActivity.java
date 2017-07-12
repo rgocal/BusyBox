@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.jrummy.busybox.installer;
+package com.jrummy.busybox.installer.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,10 +33,14 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.jrummy.busybox.installer.dialogs.RootCheckDialog;
+import com.jrummy.busybox.installer.utils.DeviceNameHelper;
+import com.jrummy.busybox.installer.utils.RootChecker;
 import com.jrummyapps.android.analytics.Analytics;
 import com.jrummyapps.android.animations.Technique;
 import com.jrummyapps.android.app.App;
 import com.jrummyapps.android.prefs.Prefs;
+import com.jrummyapps.android.roottools.checks.RootCheck;
 import com.jrummyapps.android.util.DeviceUtils;
 import com.jrummyapps.android.util.Jot;
 import com.jrummyapps.busybox.R;
@@ -50,12 +54,16 @@ import org.greenrobot.eventbus.ThreadMode;
 public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
     implements BillingProcessor.IBillingHandler {
 
+    private static final String EXTRA_ROOT_DIALOG_SHOWN = "extraRootDialogShown";
+
     InterstitialAd   interstitialAd;
     BillingProcessor bp;
 
     private AdView[] adViewTiers;
 
     private int currentAdViewIndex;
+
+    private boolean rootDialogShown;
 
     private RelativeLayout adContainer;
 
@@ -64,6 +72,13 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            rootDialogShown = savedInstanceState.getBoolean(EXTRA_ROOT_DIALOG_SHOWN);
+        }
+
+        if (!rootDialogShown) {
+            RootChecker.execute();
+        }
 
         EventBus.getDefault().register(this);
 
@@ -143,6 +158,12 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(EXTRA_ROOT_DIALOG_SHOWN, rootDialogShown);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (bp.handleActivityResult(requestCode, resultCode, data)) {
             return;
@@ -214,6 +235,14 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(Monetize.Event.RequestRemoveAds event) {
         bp.purchase(this, Monetize.decrypt(Monetize.ENCRYPTED_REMOVE_ADS_PRODUCT_ID));
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventRootCheck(RootCheck rootCheck) {
+        if (!rootCheck.accessGranted) {
+            RootCheckDialog.show(this, DeviceNameHelper.getSingleton().getName());
+            rootDialogShown = true;
+        }
     }
 
     private void loadInterstitialAd() {

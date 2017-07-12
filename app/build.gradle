@@ -76,6 +76,7 @@ dependencies {
 
   freeCompile 'com.google.firebase:firebase-ads:10.0.1'
   freeCompile 'com.anjlab.android.iab.v3:library:1.0.32'
+  freeCompile 'com.jaredrummler:android-device-names:1.1.4'
 
   compile 'com.jrummyapps:sweetsweetdesserts:1.0.0'
   compile 'com.jaredrummler:material-spinner:1.0.9'
