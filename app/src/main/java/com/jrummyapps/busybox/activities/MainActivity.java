@@ -77,12 +77,15 @@ public class MainActivity extends RadiantAppCompatActivity implements
 
   @Override public boolean onOptionsItemSelected(MenuItem item) {
     int itemId = item.getItemId();
-    if (itemId == R.id.action_settings) {
-      startActivity(new Intent(this, SettingsActivity.class));
-      return true;
-    } else if (itemId == R.id.action_promo) {
-      startActivity(new Intent(this, CrossPromoActivity.class));
-      return true;
+    switch (itemId) {
+      case R.id.action_settings: {
+        startActivity(new Intent(this, SettingsActivity.class));
+        break;
+      }
+      case R.id.action_promo: {
+        startActivity(new Intent(this, CrossPromoActivity.class));
+        break;
+      }
     }
     return super.onOptionsItemSelected(item);
   }

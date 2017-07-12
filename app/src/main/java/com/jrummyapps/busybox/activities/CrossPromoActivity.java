@@ -32,7 +32,7 @@ import static com.jrummyapps.busybox.InstalledEventReceiver.VERIFY_INSTALL_APP_D
 public class CrossPromoActivity extends RadiantAppCompatActivity
         implements AppListAdapter.OnClickListener {
 
-    private final String KEY = "rootapps";
+    private static final String REMOTE_CONFIG_KEY = "rootapps";
 
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
 
@@ -113,7 +113,8 @@ public class CrossPromoActivity extends RadiantAppCompatActivity
     private ArrayList<RootAppInfo> getFeaturedRootApps() {
         TypeToken typeToken = new TypeToken<ArrayList<RootAppInfo>>() {
         };
-        return new Gson().fromJson(mFirebaseRemoteConfig.getString(KEY), typeToken.getType());
+        return new Gson().fromJson(mFirebaseRemoteConfig.getString(REMOTE_CONFIG_KEY
+    ), typeToken.getType());
     }
 
     @Override public void onClick(RootAppInfo rootAppInfo) {
