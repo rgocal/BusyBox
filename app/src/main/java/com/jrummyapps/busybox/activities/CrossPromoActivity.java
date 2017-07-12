@@ -16,6 +16,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import com.jrummyapps.android.analytics.Analytics;
 import com.jrummyapps.android.radiant.activity.RadiantAppCompatActivity;
 import com.jrummyapps.android.util.Intents;
 import com.jrummyapps.android.widget.observablescrollview.ObservableGridView;
@@ -126,6 +127,8 @@ public class CrossPromoActivity extends RadiantAppCompatActivity
         if (rootAppInfo.getUrl() != null) {
             startActivity(Intents.newOpenWebBrowserIntent(rootAppInfo.getUrl()));
         }
+        Analytics.newEvent("clicked_cross_promo_app").put("clicked",
+                rootAppInfo.getAppName() + " (" + rootAppInfo.getPackageName() + ")").log();
     }
 
 }
