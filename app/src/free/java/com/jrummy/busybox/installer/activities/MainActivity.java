@@ -131,18 +131,6 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
         } else {
             adContainer.setVisibility(View.GONE);
         }
-
-        if (getIntent() != null) {
-            openLink(getIntent());
-        }
-    }
-
-    @Override protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-
-        if (intent != null) {
-            openLink(intent);
-        }
     }
 
     @Override
@@ -400,17 +388,6 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
             adRequest = new AdRequest.Builder().build();
         }
         return adRequest;
-    }
-
-    private void openLink(Intent intent) {
-        String link = intent.getStringExtra(EXTRA_URI_KEY);
-        if (link != null) {
-            intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(link));
-            if (intent.resolveActivity(getPackageManager()) != null) {
-                startActivity(intent);
-            }
-        }
     }
 
 }

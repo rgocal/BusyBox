@@ -37,7 +37,6 @@ import com.jrummyapps.android.files.LocalFile;
 import com.jrummyapps.android.files.external.ExternalStorageHelper;
 import com.jrummyapps.android.permiso.Permiso;
 import com.jrummyapps.android.radiant.activity.RadiantAppCompatActivity;
-import com.jrummyapps.busybox.BuildConfig;
 import com.jrummyapps.busybox.R;
 import com.jrummyapps.busybox.fragments.AppletsFragment;
 import com.jrummyapps.busybox.fragments.InstallerFragment;
@@ -68,20 +67,19 @@ public class MainActivity extends RadiantAppCompatActivity implements
     tabLayout.setupWithViewPager(viewPager);
     viewPager.setCurrentItem(1);
 
-    if (BuildConfig.FLAVOR.equals("paid")) {
-      if (getIntent() != null) {
-        openLink(getIntent());
-      }
+    if (getIntent() != null) {
+      openLink(getIntent());
     }
   }
 
   @Override protected void onNewIntent(Intent intent) {
     super.onNewIntent(intent);
 
-    if (BuildConfig.FLAVOR.equals("paid") && intent != null) {
+    if (intent != null) {
       openLink(intent);
     }
   }
+
   @Override public boolean onCreateOptionsMenu(Menu menu) {
     MenuInflater menuInflater = getMenuInflater();
     menuInflater.inflate(R.menu.main_menu, menu);
