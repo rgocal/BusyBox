@@ -31,7 +31,13 @@ android {
       applicationIdSuffix = ".installer.staging"
       ext.betaDistributionGroupAliases = "Internal"
       ext.betaDistributionNotifications = true
-      ext.betaDistributionReleaseNotes=""
+      ext.betaDistributionReleaseNotes="Add Admob interstitial placements\n" +
+              "Three New Admob Banner Placements\n" +
+              "Integrate cross promo screen in Firebase Remote Config for both versions of BusyBox (Paid and Free)\n" +
+              "Set up Fabric Custom events to track click through on each app button on the cross promotion screen\n" +
+              "Remove 1 of the 2 ad - free purchase options inside of the free BusyBox app\n" +
+              "Integrate Firebase Push Notifications for Paid and free app\n" +
+              "Integrate standard Root Checker message that pops up letting users know if their device is rooted (only for free app)"
     }
   }
 
