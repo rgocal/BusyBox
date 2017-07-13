@@ -17,7 +17,6 @@
 
 package com.jrummyapps.busybox.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -51,13 +50,7 @@ public class MainActivity extends RadiantAppCompatActivity implements
     DirectoryPickerDialog.OnDirectorySelectedListener,
     DirectoryPickerDialog.OnDirectoryPickerCancelledListener {
 
-  private static final String EXTRA_URI_KEY = "extra_web_link";
-
-  public static Intent linkIntent(Context context, String link) {
-    return new Intent(context, MainActivity.class)
-        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        .putExtra(EXTRA_URI_KEY, link);
-  }
+  protected static final String EXTRA_URI_KEY = "extra_web_link";
 
   public ViewPager viewPager;
 

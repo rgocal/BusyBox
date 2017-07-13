@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.jrummy.busybox.installer;
+package com.jrummy.busybox.installer.activities;
 
 
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.jrummy.busybox.installer;
+package com.jrummyapps.busybox.utils;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -10,8 +10,8 @@ import android.support.v4.app.NotificationCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.jrummy.busybox.installer.activities.MainActivity;
 import com.jrummyapps.busybox.R;
-import com.jrummyapps.busybox.activities.MainActivity;
 
 import java.util.Map;
 
