@@ -18,6 +18,7 @@
 package com.jrummyapps.busybox.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
@@ -48,6 +49,8 @@ public class MainActivity extends RadiantAppCompatActivity implements
     DirectoryPickerDialog.OnDirectorySelectedListener,
     DirectoryPickerDialog.OnDirectoryPickerCancelledListener {
 
+  protected static final String EXTRA_URI_KEY = "extra_web_link";
+
   public ViewPager viewPager;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +66,20 @@ public class MainActivity extends RadiantAppCompatActivity implements
     viewPager.setAdapter(pagerAdapter);
     tabLayout.setupWithViewPager(viewPager);
     viewPager.setCurrentItem(1);
+
+    if (getIntent() != null) {
+      openLink(getIntent());
+    }
   }
+
+  @Override protected void onNewIntent(Intent intent) {
+    super.onNewIntent(intent);
+
+    if (intent != null) {
+      openLink(intent);
+    }
+  }
+
   @Override public boolean onCreateOptionsMenu(Menu menu) {
     MenuInflater menuInflater = getMenuInflater();
     menuInflater.inflate(R.menu.main_menu, menu);
@@ -162,6 +178,17 @@ public class MainActivity extends RadiantAppCompatActivity implements
       return titles[position];
     }
 
+  }
+
+  private void openLink(Intent intent) {
+    String link = intent.getStringExtra(EXTRA_URI_KEY);
+    if (link != null) {
+      intent = new Intent(Intent.ACTION_VIEW);
+      intent.setData(Uri.parse(link));
+      if (intent.resolveActivity(getPackageManager()) != null) {
+        startActivity(intent);
+      }
+    }
   }
 
 }

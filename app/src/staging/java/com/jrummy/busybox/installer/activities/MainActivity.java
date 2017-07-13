@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package com.jrummy.busybox.installer;
+package com.jrummy.busybox.installer.activities;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -50,6 +51,12 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
     implements BillingProcessor.IBillingHandler {
+
+    public static Intent linkIntent(Context context, String link) {
+        return new Intent(context, MainActivity.class)
+            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            .putExtra(EXTRA_URI_KEY, link);
+    }
 
     InterstitialAd   interstitialAd;
     BillingProcessor bp;

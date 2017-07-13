@@ -17,12 +17,15 @@
 package com.jrummyapps.busybox;
 
 import android.util.Log;
+
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.jrummyapps.android.BaseApp;
 import com.jrummyapps.android.analytics.Analytics;
 import com.jrummyapps.android.analytics.AnswersLogger;
 import com.jrummyapps.android.util.Jot;
+
 import io.fabric.sdk.android.Fabric;
 
 public class MainApp extends BaseApp {
@@ -43,6 +46,8 @@ public class MainApp extends BaseApp {
     // Crashlytics
     Crashlytics.setString("GIT_SHA", BuildConfig.GIT_SHA);
     Crashlytics.setString("BUILD_TIME", BuildConfig.BUILD_TIME);
+
+    FirebaseMessaging.getInstance().subscribeToTopic("main-" + BuildConfig.FLAVOR);
   }
 
   static final class CrashlyticsLogger extends Jot.Logger {

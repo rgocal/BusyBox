@@ -92,6 +92,9 @@ dependencies {
 
   /* Remote Config */
   compile 'com.google.firebase:firebase-config:10.0.1'
+
+  /* Firebase push notifications */
+  compile 'com.google.firebase:firebase-messaging:10.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

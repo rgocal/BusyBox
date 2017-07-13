@@ -16,6 +16,7 @@
 
 package com.jrummy.busybox.installer.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -55,6 +56,12 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
     implements BillingProcessor.IBillingHandler {
 
     private static final String EXTRA_ROOT_DIALOG_SHOWN = "extraRootDialogShown";
+
+    public static Intent linkIntent(Context context, String link) {
+        return new Intent(context, MainActivity.class)
+            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            .putExtra(EXTRA_URI_KEY, link);
+    }
 
     InterstitialAd   interstitialAd;
     BillingProcessor bp;
