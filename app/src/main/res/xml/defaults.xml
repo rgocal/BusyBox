@@ -44,12 +44,12 @@
             "pname": "com.jrummyapps.rootchecker"
             },
             {
-            "app_name": "Busybox",
-            "description": "The most advanced BusyBox installer available",
+            "app_name": "Font Fix",
+            "description": "Browse and install over 4,000+ fonts`",
             "publisher": "JRummy Apps Inc.",
-            "url": "https://play.google.com/store/apps/details?id=com.jrummy.busybox.installer",
-            "icon": "https://lh3.googleusercontent.com/YxIAfaJ3xnrNyFPOVzN2XUQyE-ClILKDV1rrG9XKPyuDxBlJE7UkF0tOy5V5any5s3A=w150",
-            "pname": "com.jrummy.busybox.installer"
+            "url": "https://play.google.com/store/apps/details?id=com.jrummy.font.installer",
+            "icon": "https://lh3.googleusercontent.com/9WQrYYXZ2fgeammVqoJRJr-8cozWqQg7CS0_ymcRzvBT6NMSWHJ_NbMbRo2gKvSjBlkq=w150",
+            "pname": "com.jrummy.font.installer"
             },
             {
             "app_name": "Memory Games",
