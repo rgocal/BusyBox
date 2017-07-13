@@ -89,6 +89,12 @@
         android:name="com.jrummyapps.busybox.activities.DeveloperProfileActivity"
         android:theme="@style/Radiant.Light.NoActionBar.MaterialDialog"/>
 
+    <activity android:name="com.jrummyapps.busybox.activities.CrossPromoActivity" />
+
+    <receiver
+        android:name="com.jrummyapps.busybox.InstalledEventReceiver"
+        android:exported="false" />
+
     <meta-data
         android:name="com.google.firebase.messaging.default_notification_icon"
         android:resource="@drawable/ic_status_bar_icon"
