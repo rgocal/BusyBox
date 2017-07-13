@@ -52,8 +52,6 @@ import org.greenrobot.eventbus.ThreadMode;
 public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
     implements BillingProcessor.IBillingHandler {
 
-    private static final String EXTRA_URI_KEY = "extra_web_link";
-
     public static Intent linkIntent(Context context, String link) {
         return new Intent(context, MainActivity.class)
             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

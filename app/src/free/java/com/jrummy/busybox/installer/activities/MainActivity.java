@@ -18,7 +18,6 @@ package com.jrummy.busybox.installer.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
@@ -57,8 +56,6 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
     implements BillingProcessor.IBillingHandler {
 
     private static final String EXTRA_ROOT_DIALOG_SHOWN = "extraRootDialogShown";
-
-    private static final String EXTRA_URI_KEY = "extra_web_link";
 
     public static Intent linkIntent(Context context, String link) {
         return new Intent(context, MainActivity.class)
