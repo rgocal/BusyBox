@@ -22,7 +22,7 @@
       android:label="@string/app_name"
       android:supportsRtl="true">
     <activity
-        android:name="com.jrummy.busybox.installer.activities.MainActivity"
+        android:name="com.jrummy.busybox.installer.MainActivity"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/activity_busybox_installer"
         android:launchMode="singleInstance"
