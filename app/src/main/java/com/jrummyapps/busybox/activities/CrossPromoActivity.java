@@ -125,7 +125,7 @@ public class CrossPromoActivity extends RadiantAppCompatActivity
                 rootAppInfo.getAppName(), rootAppInfo.getPackageName()));
 
         if (rootAppInfo.getUrl() != null) {
-            Analytics.newEvent("clicked_cross_promo_app").put("clicked",
+            Analytics.newEvent("clicks_on_cross_promo").put("clicks",
                     rootAppInfo.getAppName() + " (" + rootAppInfo.getPackageName() + ")").log();
             startActivity(Intents.newOpenWebBrowserIntent(rootAppInfo.getUrl()));
         }

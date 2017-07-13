@@ -36,7 +36,7 @@ public class InstalledEventReceiver extends BroadcastReceiver {
 
             for (PackageInfo packageInfo : packages) {
                 if (packageInfo.packageName.equals(packageName)) {
-                    Analytics.newEvent("installations_from_apps_tab")
+                    Analytics.newEvent("installations_from_cross_promo")
                         .put("installed", appName + " (" + packageName + ")").log();
                     return;
                 }
