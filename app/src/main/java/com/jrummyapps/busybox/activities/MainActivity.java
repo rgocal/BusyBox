@@ -17,7 +17,9 @@
 
 package com.jrummyapps.busybox.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
@@ -34,6 +36,7 @@ import com.jrummyapps.android.files.LocalFile;
 import com.jrummyapps.android.files.external.ExternalStorageHelper;
 import com.jrummyapps.android.permiso.Permiso;
 import com.jrummyapps.android.radiant.activity.RadiantAppCompatActivity;
+import com.jrummyapps.busybox.BuildConfig;
 import com.jrummyapps.busybox.R;
 import com.jrummyapps.busybox.fragments.AppletsFragment;
 import com.jrummyapps.busybox.fragments.InstallerFragment;
@@ -45,6 +48,14 @@ import static com.jrummyapps.busybox.utils.FragmentUtils.getCurrentFragment;
 public class MainActivity extends RadiantAppCompatActivity implements
     DirectoryPickerDialog.OnDirectorySelectedListener,
     DirectoryPickerDialog.OnDirectoryPickerCancelledListener {
+
+  private static final String EXTRA_URI_KEY = "extra_web_link";
+
+  public static Intent linkIntent(Context context, String link) {
+    return new Intent(context, MainActivity.class)
+        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        .putExtra(EXTRA_URI_KEY, link);
+  }
 
   public ViewPager viewPager;
 
@@ -61,6 +72,20 @@ public class MainActivity extends RadiantAppCompatActivity implements
     viewPager.setAdapter(pagerAdapter);
     tabLayout.setupWithViewPager(viewPager);
     viewPager.setCurrentItem(1);
+
+    if (BuildConfig.FLAVOR.equals("paid")) {
+      if (getIntent() != null) {
+        openLink(getIntent());
+      }
+    }
+  }
+
+  @Override protected void onNewIntent(Intent intent) {
+    super.onNewIntent(intent);
+
+    if (BuildConfig.FLAVOR.equals("paid") && intent != null) {
+      openLink(intent);
+    }
   }
 
   @Override public boolean onOptionsItemSelected(MenuItem item) {
@@ -143,6 +168,17 @@ public class MainActivity extends RadiantAppCompatActivity implements
       return titles[position];
     }
 
+  }
+
+  private void openLink(Intent intent) {
+    String link = intent.getStringExtra(EXTRA_URI_KEY);
+    if (link != null) {
+      intent = new Intent(Intent.ACTION_VIEW);
+      intent.setData(Uri.parse(link));
+      if (intent.resolveActivity(getPackageManager()) != null) {
+        startActivity(intent);
+      }
+    }
   }
 
 }

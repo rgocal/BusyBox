@@ -71,10 +71,10 @@ android {
 }
 
 dependencies {
-  stagingCompile 'com.google.firebase:firebase-ads:10.0.1'
+  stagingCompile 'com.google.firebase:firebase-ads:10.2.1'
   stagingCompile 'com.anjlab.android.iab.v3:library:1.0.32'
 
-  freeCompile 'com.google.firebase:firebase-ads:10.0.1'
+  freeCompile 'com.google.firebase:firebase-ads:10.2.1'
   freeCompile 'com.anjlab.android.iab.v3:library:1.0.32'
 
   compile 'com.jrummyapps:sweetsweetdesserts:1.0.0'
@@ -87,6 +87,9 @@ dependencies {
   compile 'com.jrummyapps:morphing-dialog:1.0.0'
   compile 'com.jrummyapps:html-builder:1.0.1'
   compile 'com.jrummyapps:legacy-obfuscate:1.0.0'
+
+  /* Firebase push notifications */
+  compile 'com.google.firebase:firebase-messaging:10.2.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

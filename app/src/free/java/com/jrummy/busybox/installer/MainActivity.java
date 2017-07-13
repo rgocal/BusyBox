@@ -16,7 +16,9 @@
 
 package com.jrummy.busybox.installer;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
@@ -49,6 +51,14 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
     implements BillingProcessor.IBillingHandler {
+
+    private static final String EXTRA_URI_KEY = "extra_web_link";
+
+    public static Intent linkIntent(Context context, String link) {
+        return new Intent(context, MainActivity.class)
+            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            .putExtra(EXTRA_URI_KEY, link);
+    }
 
     InterstitialAd   interstitialAd;
     BillingProcessor bp;
@@ -105,6 +115,18 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
             setupSettingsInterstitialsAd();
         } else {
             adContainer.setVisibility(View.GONE);
+        }
+
+        if (getIntent() != null) {
+            openLink(getIntent());
+        }
+    }
+
+    @Override protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        if (intent != null) {
+            openLink(intent);
         }
     }
 
@@ -355,6 +377,17 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
             adRequest = new AdRequest.Builder().build();
         }
         return adRequest;
+    }
+
+    private void openLink(Intent intent) {
+        String link = intent.getStringExtra(EXTRA_URI_KEY);
+        if (link != null) {
+            intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(link));
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
+        }
     }
 
 }
