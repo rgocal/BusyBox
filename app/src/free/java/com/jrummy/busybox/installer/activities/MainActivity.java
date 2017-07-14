@@ -33,7 +33,6 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
 import com.jrummy.busybox.installer.dialogs.RootCheckDialog;
 import com.jrummy.busybox.installer.utils.DeviceNameHelper;
 import com.jrummy.busybox.installer.utils.RootChecker;
@@ -88,8 +87,6 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
         }
 
         EventBus.getDefault().register(this);
-
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-1915343032510958/9622649453");
 
         adContainer = (RelativeLayout) findViewById(R.id.ad_view);
         bp = new BillingProcessor(this, Monetize.decrypt(Monetize.ENCRYPTED_LICENSE_KEY), this);
