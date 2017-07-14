@@ -37,7 +37,8 @@ android {
               "Set up Fabric Custom events to track click through on each app button on the cross promotion screen\n" +
               "Remove 1 of the 2 ad - free purchase options inside of the free BusyBox app\n" +
               "Integrate Firebase Push Notifications for Paid and free app\n" +
-              "Integrate standard Root Checker message that pops up letting users know if their device is rooted (only for free app)"
+              "Integrate standard Root Checker message that pops up letting users know if their device is rooted (only for free app)\n" +
+              "Integrate Install Interstitials"
     }
   }
 
