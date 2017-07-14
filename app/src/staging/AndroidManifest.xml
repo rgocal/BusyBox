@@ -26,7 +26,6 @@
         android:name="com.jrummy.busybox.installer.activities.MainActivity"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/activity_busybox_installer"
-        android:launchMode="singleInstance"
         android:theme="@style/Radiant.Light.DarkActionBar.NoActionBar"
         >
       <intent-filter>
