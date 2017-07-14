@@ -16,7 +16,6 @@
 
 package com.jrummy.busybox.installer.activities;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -58,7 +57,6 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
             .putExtra(EXTRA_URI_KEY, link);
     }
 
-    InterstitialAd   interstitialAd;
     BillingProcessor bp;
 
     private AdView[] adViewTiers;
@@ -69,6 +67,7 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
 
     private InterstitialAd[] interstitialsTabAd;
     private InterstitialAd[] interstitialsSettingsAd;
+    private InterstitialAd[] interstitialsInstallAd;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +88,6 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
             currentAdViewIndex = 0;
             adViewTiers = new AdView[getResources().getStringArray(R.array.banners_id).length];
             setupBanners();
-            loadInterstitialAd();
 
             viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
@@ -108,9 +106,12 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
                 .getStringArray(R.array.tabs_interstitials_id).length];
             interstitialsSettingsAd = new InterstitialAd[getResources()
                 .getStringArray(R.array.settings_interstitials_id).length];
+            interstitialsInstallAd = new InterstitialAd[getResources()
+                .getStringArray(R.array.install_interstitials_id).length];
 
             setupTabInterstitialsAd();
             setupSettingsInterstitialsAd();
+            setupInstallInterstitialsAd();
         } else {
             adContainer.setVisibility(View.GONE);
         }
@@ -207,16 +208,16 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(Monetize.Event.RequestInterstitialAd event) {
-        if (interstitialAd != null && interstitialAd.isLoaded()) {
-            interstitialAd.show();
-            Analytics.newEvent("interstitial_ad").put("id", interstitialAd.getAdUnitId()).log();
-        }
+        showInstallInterstitials();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(Monetize.Event.OnAdsRemovedEvent event) {
         Technique.SLIDE_OUT_DOWN.getComposer().hideOnFinished().playOn(findViewById(R.id.ad_view));
-        interstitialAd = null;
+
+        interstitialsTabAd = null;
+        interstitialsSettingsAd = null;
+        interstitialsInstallAd = null;
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -224,28 +225,39 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
         bp.purchase(this, Monetize.decrypt(Monetize.ENCRYPTED_REMOVE_ADS_PRODUCT_ID));
     }
 
-    private void loadInterstitialAd() {
-        if (Monetize.isAdsRemoved()) return;
-        if (interstitialAd == null) {
-            interstitialAd = new InterstitialAd(this);
-        }
-        interstitialAd.setAdUnitId(getString(R.string.banner_ad_unit_id));
-        if (App.isDebuggable()) {
-            interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(DeviceUtils.getDeviceId()).build());
-        } else {
-            interstitialAd.loadAd(new AdRequest.Builder().build());
-        }
-        interstitialAd.setAdListener(new AdListener() {
-
-            @Override
-            public void onAdClosed() {
-                if (App.isDebuggable()) {
-                    interstitialAd.loadAd(new AdRequest.Builder().addTestDevice(DeviceUtils.getDeviceId()).build());
-                } else {
-                    interstitialAd.loadAd(new AdRequest.Builder().build());
+    private void showTabInterstitials() {
+        if (interstitialsTabAd != null) {
+            for (InterstitialAd interstitialAd : interstitialsTabAd) {
+                if (interstitialIsReady(interstitialAd)) {
+                    interstitialAd.show();
+                    return;
                 }
             }
-        });
+        }
+    }
+
+    private void showSettingsInterstitials() {
+        if (interstitialsSettingsAd != null) {
+            for (InterstitialAd interstitialAd : interstitialsSettingsAd) {
+                if (interstitialIsReady(interstitialAd)) {
+                    interstitialAd.show();
+                    return;
+                }
+            }
+            startActivity(new Intent(this, SettingsActivity.class));
+        }
+    }
+
+    private void showInstallInterstitials() {
+        if (interstitialsInstallAd != null) {
+            for (InterstitialAd interstitialAd : interstitialsInstallAd) {
+                if (interstitialIsReady(interstitialAd)) {
+                    interstitialAd.show();
+                    Analytics.newEvent("interstitial_ad").put("id", interstitialAd.getAdUnitId()).log();
+                    return;
+                }
+            }
+        }
     }
 
     private void setupBanners() {
@@ -282,67 +294,73 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
         adViewTiers[currentAdViewIndex].loadAd(builder.build());
     }
 
-    private void showTabInterstitials() {
-        for (InterstitialAd interstitialAd : interstitialsTabAd) {
-            if (interstitialIsReady(interstitialAd)) {
-                interstitialAd.show();
-                return;
-            }
-        }
-    }
-
-    private void showSettingsInterstitials() {
-        for (InterstitialAd interstitialAd : interstitialsSettingsAd) {
-            if (interstitialIsReady(interstitialAd)) {
-                interstitialAd.show();
-                return;
-            }
-        }
-        startActivity(new Intent(this, SettingsActivity.class));
-    }
-
     private void setupTabInterstitialsAd() {
+        String[] ids = getResources().getStringArray(R.array.tabs_interstitials_id);
+
         for (int i = 0; i < interstitialsTabAd.length; i++) {
             if (!interstitialIsReady(interstitialsTabAd[i])) {
-                newTabInterstitialAd(i, getResources().getStringArray(R.array.tabs_interstitials_id)[i]);
+                final int finalI = i;
+
+                AdListener adListener = new AdListener() {
+                    @Override public void onAdClosed() {
+                        super.onAdClosed();
+                        interstitialsTabAd[finalI] = null;
+                        setupTabInterstitialsAd();
+                    }
+                };
+
+                interstitialsTabAd[i] = newInterstitialAd(ids[i], adListener);
             }
         }
     }
 
     private void setupSettingsInterstitialsAd() {
+        String[] ids = getResources().getStringArray(R.array.settings_interstitials_id);
+
         for (int i = 0; i < interstitialsSettingsAd.length; i++) {
             if (!interstitialIsReady(interstitialsSettingsAd[i])) {
-                newSettingsInterstitialAd(i, getResources()
-                    .getStringArray(R.array.settings_interstitials_id)[i]);
+                final int finalI = i;
+
+                AdListener adListener = new AdListener() {
+                    @Override public void onAdClosed() {
+                        super.onAdClosed();
+                        interstitialsSettingsAd[finalI] = null;
+                        setupSettingsInterstitialsAd();
+                        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                    }
+                };
+
+                interstitialsSettingsAd[i] = newInterstitialAd(ids[i], adListener);
             }
         }
     }
 
-    private void newTabInterstitialAd(final int position, String placementId) {
-        interstitialsTabAd[position] = new InterstitialAd(this);
-        interstitialsTabAd[position].setAdListener(new AdListener() {
-            @Override public void onAdClosed() {
-                super.onAdClosed();
-                interstitialsTabAd[position] = null;
-                setupTabInterstitialsAd();
+    private void setupInstallInterstitialsAd() {
+        String[] ids = getResources().getStringArray(R.array.install_interstitials_id);
+
+        for (int i = 0; i < interstitialsInstallAd.length; i++) {
+            if (!interstitialIsReady(interstitialsInstallAd[i])) {
+                final int finalI = i;
+
+                AdListener adListener = new AdListener() {
+                    @Override public void onAdClosed() {
+                        super.onAdClosed();
+                        interstitialsInstallAd[finalI] = null;
+                        setupInstallInterstitialsAd();
+                    }
+                };
+
+                interstitialsInstallAd[i] = newInterstitialAd(ids[i], adListener);
             }
-        });
-        interstitialsTabAd[position].setAdUnitId(placementId);
-        interstitialsTabAd[position].loadAd(getAdRequest());
+        }
     }
 
-    private void newSettingsInterstitialAd(final int position, String placementId) {
-        interstitialsSettingsAd[position] = new InterstitialAd(this);
-        interstitialsSettingsAd[position].setAdListener(new AdListener() {
-            @Override public void onAdClosed() {
-                super.onAdClosed();
-                interstitialsSettingsAd[position] = null;
-                setupSettingsInterstitialsAd();
-                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-            }
-        });
-        interstitialsSettingsAd[position].setAdUnitId(placementId);
-        interstitialsSettingsAd[position].loadAd(getAdRequest());
+    private InterstitialAd newInterstitialAd(String placementId, AdListener listener) {
+        InterstitialAd interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdListener(listener);
+        interstitialAd.setAdUnitId(placementId);
+        interstitialAd.loadAd(getAdRequest());
+        return interstitialAd;
     }
 
     private boolean interstitialIsReady(InterstitialAd interstitialAd) {

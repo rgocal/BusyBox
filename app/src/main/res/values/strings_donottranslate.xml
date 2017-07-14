@@ -17,13 +17,12 @@
   -->
 
 <resources xmlns:tools="http://schemas.android.com/tools">
-  <string name="banner_ad_unit_id">ca-app-pub-1915343032510958/9622649453</string>
 
-    <string-array name="banners_id">
-        <item>ca-app-pub-4229758926684576/2172802242</item>
-        <item>ca-app-pub-4229758926684576/3649535444</item>
-        <item>ca-app-pub-4229758926684576/6603001842</item>
-    </string-array>
+  <string-array name="banners_id">
+      <item>ca-app-pub-4229758926684576/2172802242</item>
+      <item>ca-app-pub-4229758926684576/3649535444</item>
+      <item>ca-app-pub-4229758926684576/6603001842</item>
+  </string-array>
 
   <string-array name="tabs_interstitials_id">
     <item>ca-app-pub-4229758926684576/8079735045</item>
@@ -35,6 +34,12 @@
     <item>ca-app-pub-4229758926684576/6463401044</item>
     <item>ca-app-pub-4229758926684576/7940134248</item>
     <item>ca-app-pub-4229758926684576/9416867444</item>
+  </string-array>
+
+  <string-array name="install_interstitials_id">
+    <item>ca-app-pub-4229758926684576/9784650640</item>
+    <item>ca-app-pub-4229758926684576/2261383842</item>
+    <item>ca-app-pub-4229758926684576/3738117046</item>
   </string-array>
 
   <string name="website_main">http://jrummyapps.com</string>
