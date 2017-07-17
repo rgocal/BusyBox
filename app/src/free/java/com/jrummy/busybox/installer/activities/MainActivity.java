@@ -131,9 +131,11 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
 
     @Override
     protected void onPause() {
-        for (AdView adView : adViewTiers) {
-            if (adView != null) {
-                adView.pause();
+        if (!Monetize.isAdsRemoved()) {
+            for (AdView adView : adViewTiers) {
+                if (adView != null) {
+                    adView.pause();
+                }
             }
         }
         super.onPause();
@@ -142,9 +144,11 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
     @Override
     protected void onResume() {
         super.onResume();
-        for (AdView adView : adViewTiers) {
-            if (adView != null) {
-                adView.resume();
+        if (!Monetize.isAdsRemoved()) {
+            for (AdView adView : adViewTiers) {
+                if (adView != null) {
+                    adView.resume();
+                }
             }
         }
     }
@@ -156,9 +160,11 @@ public class MainActivity extends com.jrummyapps.busybox.activities.MainActivity
         if (bp != null) {
             bp.release();
         }
-        for (AdView adView : adViewTiers) {
-            if (adView != null) {
-                adView.destroy();
+        if (!Monetize.isAdsRemoved()) {
+            for (AdView adView : adViewTiers) {
+                if (adView != null) {
+                    adView.destroy();
+                }
             }
         }
     }
