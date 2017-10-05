@@ -102,7 +102,7 @@ dependencies {
   compile 'com.jaredrummler:fastscroll-recyclerview:1.0.1'
   compile 'org.apache.commons:commons-compress:1.5'
   compile 'com.commit451:elasticdragdismisslayout:1.0.2'
-  compile 'com.jrummyapps:texteditor:2.0.0'
+  compile 'com.jrummyapps:texteditor:2.1.0'
 
   compile 'com.jrummyapps:downloader:2.0.0'
   compile 'com.jrummyapps:morphing-dialog:1.0.0'
