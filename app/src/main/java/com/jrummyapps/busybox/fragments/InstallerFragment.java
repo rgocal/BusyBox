@@ -69,9 +69,9 @@ import com.jrummyapps.android.downloader.DownloadRequest;
 import com.jrummyapps.android.downloader.dialogs.DownloadProgressDialog;
 import com.jrummyapps.android.downloader.events.DownloadError;
 import com.jrummyapps.android.downloader.events.DownloadFinished;
-import com.jrummyapps.android.drawable.CircleDrawable;
-import com.jrummyapps.android.drawable.TextDrawable;
+import com.jrummyapps.android.fileicons.CircleDrawable;
 import com.jrummyapps.android.fileproperties.activities.FilePropertiesActivity;
+import com.jrummyapps.android.fileproperties.drawable.TextDrawable;
 import com.jrummyapps.android.fileproperties.models.FileMeta;
 import com.jrummyapps.android.files.FileIntents;
 import com.jrummyapps.android.files.FilePermission;
@@ -830,7 +830,7 @@ public class InstallerFragment extends RadiantSupportFragment implements
   private void setLegendText(int id, String title, long size, long total, int color) {
     String percent = formatPercent(size, total);
     TextDrawable legendDrawable = new TextDrawable(getActivity(), percent).setBackgroundColor(Color.TRANSPARENT);
-    CircleDrawable drawable = new CircleDrawable(legendDrawable, color);
+    CircleDrawable drawable = new CircleDrawable(legendDrawable, color, Color.TRANSPARENT);
     drawable.setBounds(0, 0, ResUtils.dpToPx(32), ResUtils.dpToPx(32));
     TextView textView = getViewById(id);
 
