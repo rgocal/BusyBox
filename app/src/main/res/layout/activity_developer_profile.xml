@@ -82,7 +82,7 @@
           android:gravity="center_horizontal"
           android:orientation="horizontal">
 
-        <com.jrummyapps.android.widget.AnimatedSvgView
+        <com.jaredrummler.android.widget.AnimatedSvgView
             android:id="@+id/twitter"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -96,7 +96,7 @@
             app:animatedSvgTraceTime="2000"
             app:animatedSvgTraceTimePerGlyph="1000"/>
 
-        <com.jrummyapps.android.widget.AnimatedSvgView
+        <com.jaredrummler.android.widget.AnimatedSvgView
             android:id="@+id/google_plus"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -110,7 +110,7 @@
             app:animatedSvgTraceTime="2000"
             app:animatedSvgTraceTimePerGlyph="1000"/>
 
-        <com.jrummyapps.android.widget.AnimatedSvgView
+        <com.jaredrummler.android.widget.AnimatedSvgView
             android:id="@+id/github"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -124,7 +124,7 @@
             app:animatedSvgTraceTime="2000"
             app:animatedSvgTraceTimePerGlyph="1000"/>
 
-        <com.jrummyapps.android.widget.AnimatedSvgView
+        <com.jaredrummler.android.widget.AnimatedSvgView
             android:id="@+id/linkedin"
             android:layout_width="24dp"
             android:layout_height="24dp"

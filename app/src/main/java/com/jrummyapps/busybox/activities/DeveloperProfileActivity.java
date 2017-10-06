@@ -19,13 +19,14 @@ package com.jrummyapps.busybox.activities;
 
 import android.content.ActivityNotFoundException;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.transition.Transition;
 import android.view.View;
+
+import com.jaredrummler.android.widget.AnimatedSvgView;
 import com.jrummyapps.android.analytics.Analytics;
 import com.jrummyapps.android.animations.Rebound;
 import com.jrummyapps.android.radiant.Radiant;
@@ -35,7 +36,6 @@ import com.jrummyapps.android.transitions.TransitionUtils;
 import com.jrummyapps.android.util.Intents;
 import com.jrummyapps.android.util.OrientationUtils;
 import com.jrummyapps.android.util.ResUtils;
-import com.jrummyapps.android.widget.AnimatedSvgView;
 import com.jrummyapps.busybox.R;
 import com.jrummyapps.busybox.design.SvgIcons;
 

@@ -115,6 +115,8 @@ dependencies {
 
   /* Firebase push notifications */
   compile 'com.google.firebase:firebase-messaging:10.0.1'
+
+  compile 'com.jaredrummler:animated-svg-view:1.0.5'
 }
 
 apply plugin: 'com.google.gms.google-services'
