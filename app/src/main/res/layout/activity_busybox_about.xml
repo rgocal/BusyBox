@@ -48,7 +48,7 @@
           android:layout_gravity="center"
           android:background="#40000000">
 
-        <com.jrummyapps.android.widget.AnimatedSvgView
+        <com.jaredrummler.android.widget.AnimatedSvgView
             android:id="@+id/svg"
             android:layout_width="200dp"
             android:layout_height="200dp"

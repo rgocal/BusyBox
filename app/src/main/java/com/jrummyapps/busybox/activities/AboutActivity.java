@@ -25,13 +25,14 @@ import android.text.method.LinkMovementMethod;
 import android.transition.TransitionInflater;
 import android.view.View;
 import android.widget.TextView;
+
 import com.commit451.elasticdragdismisslayout.ElasticDragDismissFrameLayout;
 import com.commit451.elasticdragdismisslayout.ElasticDragDismissListener;
+import com.jaredrummler.android.widget.AnimatedSvgView;
 import com.jrummyapps.android.animations.Technique;
 import com.jrummyapps.android.radiant.activity.RadiantAppCompatActivity;
 import com.jrummyapps.android.radiant.tinting.SystemBarTint;
 import com.jrummyapps.android.util.HtmlBuilder;
-import com.jrummyapps.android.widget.AnimatedSvgView;
 import com.jrummyapps.busybox.R;
 import com.jrummyapps.busybox.design.SvgIcons;
 

@@ -19,7 +19,7 @@ package com.jrummyapps.busybox.design;
 
 import android.graphics.Color;
 
-import com.jrummyapps.android.widget.AnimatedSvgView;
+import com.jaredrummler.android.widget.AnimatedSvgView;
 
 public enum SvgIcons {
   LOGO(
