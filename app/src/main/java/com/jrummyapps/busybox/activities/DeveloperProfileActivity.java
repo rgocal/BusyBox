@@ -19,6 +19,7 @@ package com.jrummyapps.busybox.activities;
 
 import android.content.ActivityNotFoundException;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;

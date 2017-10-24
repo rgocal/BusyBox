@@ -1,5 +1,6 @@
 package com.jrummyapps.busybox.adapters;
 
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.jrummyapps.busybox.models.RootAppInfo;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AppListAdapter extends BaseAdapter {
 
@@ -65,7 +67,7 @@ public class AppListAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void setAppInfos(ArrayList<RootAppInfo> appInfos) {
+    public void setAppInfos(@NonNull List<RootAppInfo> appInfos) {
         this.appInfos.clear();
         this.appInfos.addAll(appInfos);
     }
