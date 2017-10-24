@@ -107,7 +107,7 @@ public class CrossPromoActivity extends RadiantAppCompatActivity
         }
         adapter.setAppInfos(crossPromoAppInfos);
 
-        ObservableGridView gridView = getViewById(R.id.list);
+        ObservableGridView gridView = (ObservableGridView) getViewById(R.id.list);
         gridView.setAdapter(adapter);
     }
 
