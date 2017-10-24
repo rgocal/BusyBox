@@ -14,7 +14,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.jrummyapps.android.analytics.Analytics;
 import com.jrummyapps.android.radiant.activity.RadiantAppCompatActivity;
@@ -27,6 +26,7 @@ import com.jrummyapps.busybox.adapters.AppListAdapter;
 import com.jrummyapps.busybox.models.RootAppInfo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.jrummyapps.busybox.InstalledEventReceiver.VERIFY_INSTALL_APP_DELAY_IN_MILLIS;
 
@@ -95,15 +95,19 @@ public class CrossPromoActivity extends RadiantAppCompatActivity
 
     private void showAppList() {
         AppListAdapter adapter = new AppListAdapter(this);
-        ArrayList<RootAppInfo> rootAppInfos = new ArrayList<>();
+
+        List<RootAppInfo> crossPromoAppInfos = null;
         try {
-            rootAppInfos = getFeaturedRootApps();
-        } catch (JsonSyntaxException e) {
+            crossPromoAppInfos = getFeaturedRootApps();
+        } catch (Exception e) {
             Crashlytics.logException(e);
         }
-        adapter.setAppInfos(rootAppInfos);
+        if (crossPromoAppInfos == null) {
+            crossPromoAppInfos = new ArrayList<>();
+        }
+        adapter.setAppInfos(crossPromoAppInfos);
 
-        ObservableGridView gridView = (ObservableGridView) findViewById(R.id.list);
+        ObservableGridView gridView = getViewById(R.id.list);
         gridView.setAdapter(adapter);
     }
 
