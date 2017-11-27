@@ -20,6 +20,9 @@ allprojects {
         password = "${artifactory_password}"
       }
     }
+    maven {
+      url "https://maven.google.com"
+    }
   }
 }
 
