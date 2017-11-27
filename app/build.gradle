@@ -4,7 +4,7 @@ import java.util.regex.Pattern
 
 def versionMajor = 6
 def versionMinor = 7
-def versionPatch = 9
+def versionPatch = 10
 def versionBuild = 0
 def versionSuffix = versionBuild > 0 ? "-beta" : ""
 
@@ -66,6 +66,7 @@ android {
     versionName "${versionMajor}.${versionMinor}.${versionPatch}.${versionBuild}${versionSuffix}"
     buildConfigField "String", "GIT_SHA", "\"${gitSha()}\""
     buildConfigField "String", "BUILD_TIME", "\"${buildTime()}\""
+    multiDexEnabled true
   }
 
   buildTypes {
@@ -90,10 +91,10 @@ dependencies {
   compile "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
   compile "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
 
-  stagingCompile 'com.google.firebase:firebase-ads:10.0.1'
+  stagingCompile 'com.google.firebase:firebase-ads:11.6.0'
   stagingCompile 'com.anjlab.android.iab.v3:library:1.0.32'
 
-  freeCompile 'com.google.firebase:firebase-ads:10.0.1'
+  freeCompile 'com.google.firebase:firebase-ads:11.6.0'
   freeCompile 'com.anjlab.android.iab.v3:library:1.0.32'
   freeCompile 'com.jaredrummler:android-device-names:1.1.4'
 
@@ -111,12 +112,14 @@ dependencies {
   compile 'com.google.code.gson:gson:2.4'
 
   /* Remote Config */
-  compile 'com.google.firebase:firebase-config:10.0.1'
+  compile 'com.google.firebase:firebase-config:11.6.0'
 
   /* Firebase push notifications */
-  compile 'com.google.firebase:firebase-messaging:10.0.1'
+  compile 'com.google.firebase:firebase-messaging:11.6.0'
 
   compile 'com.jaredrummler:animated-svg-view:1.0.5'
+
+  compile 'com.android.support:multidex:1.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

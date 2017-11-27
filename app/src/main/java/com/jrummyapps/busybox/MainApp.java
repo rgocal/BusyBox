@@ -16,6 +16,7 @@
 
 package com.jrummyapps.busybox;
 
+import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
@@ -32,6 +33,7 @@ public class MainApp extends BaseApp {
 
   @Override public void onCreate() {
     super.onCreate();
+    MultiDex.install(this);
 
     // Logging
     if (BuildConfig.DEBUG) {
