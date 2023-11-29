@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>rootapps</key>
+        <value>[
+            {
+            "app_name": "File Manager",
+            "description": "All-in-one file manager with cloud storage options",
+            "publisher": "Maple Media",
+            "url": "https://play.google.com/store/apps/details?id=fm.clean",
+            "icon": "https://lh3.googleusercontent.com/gJIMHUXRr8fAUruzLFBh6VaXpYS-V7gU1SCWaWIWlTCKEpQbcdQiXIRU2mJMpRZmUFg=w150",
+            "pname": "fm.clean"
+            },
+            {
+            "app_name": "Root Browser",
+            "description": "File manager for root device superusers",
+            "publisher": "JRummy Apps Inc.",
+            "url": "https://play.google.com/store/apps/details?id=com.jrummy.root.browserfree",
+            "icon": "https://lh5.ggpht.com/meP_0ZkWXf2kSnR8chxRBGqep4aswUDtoVQdvDUqMmoLqLGSOeh6gIETOZlTkmuMlQ=w150",
+            "pname": "com.jrummy.root.browserfree"
+            },
+            {
+            "app_name": "PDF Viewer",
+            "description": "View and manage your PDF documents and eBooks",
+            "publisher": "Maple Media",
+            "url": "https://play.google.com/store/apps/details?id=the.pdfviewer3",
+            "icon": "https://lh3.googleusercontent.com/9IxEo-iOHdf5B39uoMeIcMvcmCcbJhv6XPNRGXGPBHyQGWNZYi32xgjWdUoQ5ZlJvKU=w150",
+            "pname": "the.pdfviewer3"
+            },
+            {
+            "app_name": "Boot Animations",
+            "description": "Install custom device boot animations",
+            "publisher": "JRummy Apps Inc.",
+            "url": "https://play.google.com/store/apps/details?id=com.jrummy.apps.boot.animations",
+            "icon": "https://lh3.googleusercontent.com/CHf0W2V8oUYM0sz1zN3AItWTl78EDajyAcUfQPYA5LRzxR69YBM334mnZAMo2PCKcIo=w150",
+            "pname": "com.jrummy.apps.boot.animations"
+            },
+            {
+            "app_name": "Root Check",
+            "description": "Check device root status &amp; learn more about root",
+            "publisher": "JRummy Apps Inc.",
+            "url": "https://play.google.com/store/apps/details?id=com.jrummyapps.rootchecker",
+            "icon": "https://lh3.googleusercontent.com/j7IE98kSAJx62z2bfInww7WYCcrqK1BW_sHQL8t4pAI_JqMd9ck-VFyor_-wE4WHCBY=w150",
+            "pname": "com.jrummyapps.rootchecker"
+            },
+            {
+            "app_name": "Font Fix",
+            "description": "Browse and install over 4,000+ fonts`",
+            "publisher": "JRummy Apps Inc.",
+            "url": "https://play.google.com/store/apps/details?id=com.jrummy.font.installer",
+            "icon": "https://lh3.googleusercontent.com/9WQrYYXZ2fgeammVqoJRJr-8cozWqQg7CS0_ymcRzvBT6NMSWHJ_NbMbRo2gKvSjBlkq=w150",
+            "pname": "com.jrummy.font.installer"
+            },
+            {
+            "app_name": "Memory Games",
+            "description": "Logic games and brain training to keep you mind sharp",
+            "publisher": "Maple Media",
+            "url": "https://play.google.com/store/apps/details?id=com.memory.brain.training.games",
+            "icon": "https://lh3.googleusercontent.com/hekwCamTffC2-O0nOxORK9V6BlbBXOc4HpZmZRu1TFvAgFmnOrLfop-mZrfagSzGH5Q=w150",
+            "pname": "com.memory.brain.training.games"
+            },
+            {
+            "app_name": "Taxi Driver: Hill Station",
+            "description": "Thrilling and fun taxi driver simulation game",
+            "publisher": "Tapinator, Inc. (Ticker: TAPM)",
+            "url": "https://play.google.com/store/apps/details?id=com.tapinator.taxi.driver.hillstation",
+            "icon": "https://lh3.googleusercontent.com/1OWLiLXglYqpeBXv5yj5hYG32heIh8lnXVd63frMJ8R2kEItlCy2hiy26TR83c6QngQ=w150",
+            "pname": "com.tapinator.taxi.driver.hillstation"
+            }
+            ]</value>
+    </entry>
+</defaultsMap>

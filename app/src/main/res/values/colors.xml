@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<resources>
+
+  <!-- Accent colors -->
+  <color name="color_accent_reference">#FFD75544</color>
+  <color name="color_accent_light_reference">#FFF67E6E</color>
+  <color name="color_accent_dark_reference">#FFB93423</color>
+
+  <!-- Primary colors -->
+  <color name="color_primary_reference">#FF40A3C4</color>
+  <color name="color_primary_dark_reference">#FF228EB2</color>
+  <color name="color_primary_light_reference">#FF64BAD6</color>
+
+  <!-- Button colors -->
+  <color name="color_button_green">#FF62AD2B</color>
+  <color name="color_button_dark_green">#FF4C931F</color>
+
+</resources>

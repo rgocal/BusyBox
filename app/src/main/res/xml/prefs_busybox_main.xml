@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+  <PreferenceCategory
+      android:key="installer"
+      android:title="Installer">
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="symlink_busybox_applets"
+        android:summary="@string/create_symlinks_to_applets"
+        android:title="@string/install_applets"
+        android:widgetLayout="@layout/preference_switch_layout"/>
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="replace_with_busybox_applets"
+        android:summary="@string/replace_existing_applets"
+        android:title="@string/replace_applets"
+        android:widgetLayout="@layout/preference_switch_layout"/>
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="install_busybox_in_recovery"
+        android:summary="@string/install_busybox_in_recovery"
+        android:title="@string/recovery_mode"
+        android:widgetLayout="@layout/preference_switch_layout"/>
+
+  </PreferenceCategory>
+
+  <PreferenceCategory
+      android:key="appearance"
+      android:title="@string/appearance">
+    <Preference
+        android:key="application_theme"
+        android:summary="@string/choose_between_preinstalled_themes"
+        android:title="@string/theme"/>
+
+    <com.jrummyapps.android.colorpicker.ColorPreference
+        android:defaultValue="@color/color_primary_reference"
+        android:key="primary_color"
+        android:summary="@string/primary_color_summary"
+        android:title="@string/primary_color"
+        app:cpv_dialogTitle="@string/primary_color"/>
+    <com.jrummyapps.android.colorpicker.ColorPreference
+        android:defaultValue="@color/color_accent_reference"
+        android:key="accent_color"
+        android:summary="@string/accent_color_summary"
+        android:title="@string/accent_color"
+        app:cpv_dialogTitle="@string/accent_color"/>
+    <com.jrummyapps.android.colorpicker.ColorPreference
+        android:defaultValue="@color/background_material_light"
+        android:key="background_color"
+        android:summary="@string/background_color_summary"
+        android:title="@string/background_color"
+        app:cpv_dialogTitle="@string/background_color"
+        app:cpv_showColorShades="false"
+        tools:ignore="PrivateResource"/>
+
+    <CheckBoxPreference
+        android:defaultValue="@bool/shouldColorNavigationBar"
+        android:key="color_navigation_bar"
+        android:summary="@string/colored_navigation_bar_summary"
+        android:title="@string/colored_navigation_bar"
+        android:widgetLayout="@layout/preference_switch_layout"/>
+  </PreferenceCategory>
+
+</PreferenceScreen>

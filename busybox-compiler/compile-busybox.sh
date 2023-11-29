@@ -9,13 +9,13 @@
 # diff -urN ../busybox-${BB_VERSION}.orig/ . > ../patches-${BB_VERSION}/${PATCH_NAME}.patch
 
 print_usage() {
-    echo "Usage: $0 <arm|x86|mips> <pie|nopie|static>"
+    echo "Usage: $0 <arm|arm64|x86|mips> <pie|nopie|static>"
     exit 1
 }
 
-BB_VERSION="1.24.1"
+BB_VERSION="1.26.2"
 VERSION_SUFFIX="jrummy"
-ANDROID_NATIVE_API_LEVEL="android-9"
+ANDROID_NATIVE_API_LEVEL="android-21"
 GCC_VERSION="4.9"
 MARCH="$1"
 PARAM="$2"
@@ -27,8 +27,15 @@ then
   exit 1
 fi
 
+#[ "$MARCH" == "arm64" ] && ANDROID_NATIVE_API_LEVEL="android-21"
+
+# Extra config required for specific API levels
+# This will be prepended to the .config before building
+EXTRACONFIG=
+[ ${ANDROID_NATIVE_API_LEVEL#android-} -ge 21 ] && EXTRACONFIG=android_ndk_defconfig-sdk21
+
 case "$MARCH" in
-  arm|intel|x86|mips) ;;
+  arm|arm64|intel|x86|mips) ;;
   *) print_usage
 esac
 
@@ -103,7 +110,14 @@ case "$MARCH" in
     CONFIG_EXTRA_CFLAGS="-DANDROID -D__ANDROID__ -DSK_RELEASE -nostdlib -march=armv5te -msoft-float -mfloat-abi=softfp -mfpu=neon -mthumb -mthumb-interwork -fpic -fno-short-enums -fgcse-after-reload -frename-registers $CFLAGS"
     CONFIG_EXTRA_LDFLAGS="-Xlinker -z -Xlinker muldefs -nostdlib -Bdynamic -Xlinker -dynamic-linker -Xlinker /system/bin/linker -Xlinker -z -Xlinker nocopyreloc -Xlinker --no-undefined \${SYSROOT}/usr/lib/crtbegin_dynamic.o \${SYSROOT}/usr/lib/crtend_android.o -fuse-ld=bfd $LDFLAGS"
     CONFIG_EXTRA_LDLIBS="m c gcc"
-    ;;
+  ;;
+  arm64)
+    CONFIG_CROSS_COMPILER_PREFIX="$ANDROID_NDK_ROOT/toolchains/aarch64-linux-android-$GCC_VERSION/prebuilt/$HOST_OS-$HOST_ARCH/bin/aarch64-linux-android-"
+    CONFIG_SYSROOT="$ANDROID_NDK_ROOT/platforms/$ANDROID_NATIVE_API_LEVEL/arch-arm64"
+    CONFIG_EXTRA_CFLAGS="-DANDROID -D__ANDROID__ -DSK_RELEASE -nostdlib -march=armv8-a -fpic -fno-short-enums -fgcse-after-reload -frename-registers $CFLAGS"
+    CONFIG_EXTRA_LDFLAGS="-Xlinker -z -Xlinker muldefs -nostdlib -Bdynamic -Xlinker -dynamic-linker -Xlinker /system/bin/linker64 -Xlinker -z -Xlinker nocopyreloc -Xlinker --no-undefined \${SYSROOT}/usr/lib/crtbegin_dynamic.o \${SYSROOT}/usr/lib/crtend_android.o -fuse-ld=bfd $LDFLAGS"
+    CONFIG_EXTRA_LDLIBS="m c gcc"
+  ;;
   intel|x86)
     CONFIG_CROSS_COMPILER_PREFIX="$ANDROID_NDK_ROOT/toolchains/x86-$GCC_VERSION/prebuilt/$HOST_OS-$HOST_ARCH/bin/i686-linux-android-"
     CONFIG_SYSROOT="$ANDROID_NDK_ROOT/platforms/$ANDROID_NATIVE_API_LEVEL/arch-x86"
@@ -143,6 +157,13 @@ esac
 
 sed -i "s|^EXTRAVERSION =.*|EXTRAVERSION = -$VERSION_SUFFIX|" ./Makefile
 make $defconfig || exit 1
+
+# This needs to be first otherwise it'll get ignored
+if [ -n "$EXTRACONFIG" ]; then
+  cat ../patches-$BB_VERSION/$EXTRACONFIG .config > .config.new && mv .config.new .config
+  echo ">>> Disabling API 21+ incompatible applets (ignore the warnings)"
+  make silentoldconfig
+fi
 
 echo ">>> make"
 unset CFLAGS LDFLAGS

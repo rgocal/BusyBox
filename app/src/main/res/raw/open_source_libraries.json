@@ -1,0 +1,187 @@
+﻿[
+  {
+    "project": "Android Compatibility Library v4",
+    "authors": "Google",
+    "url": "https://github.com/android/platform_frameworks_support",
+    "license": "Apache Software License 2.0",
+    "license_url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
+    "avatar": "https://avatars.githubusercontent.com/u/30177?v=3&s=200"
+  },
+  {
+    "project": "Android Compatibility Library v7",
+    "authors": "Google",
+    "url": "https://github.com/android/platform_frameworks_support",
+    "license": "Apache Software License 2.0",
+    "license_url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
+    "avatar": "https://avatars.githubusercontent.com/u/30177?v=3&s=200"
+  },
+  {
+    "project": "Android Cardview",
+    "authors": "Google",
+    "url": "https://github.com/android/platform_frameworks_support",
+    "license": "Apache Software License 2.0",
+    "license_url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
+    "avatar": "https://avatars.githubusercontent.com/u/30177?v=3&s=200"
+  },
+  {
+    "project": "Apache Commons Compress™",
+    "authors": "Apache Commons™",
+    "url": "https://commons.apache.org/proper/commons-compress/",
+    "year": 2015,
+    "license": "Apache Software License 2.0",
+    "license_url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
+    "avatar": "https://avatars.githubusercontent.com/u/47359?v=3&s=200"
+  },
+  {
+    "project": "Android-ObservableScrollView",
+    "authors": "Soichiro Kashima",
+    "url": "https://github.com/ksoichiro/Android-ObservableScrollView",
+    "year": 2014,
+    "license": "Apache Software License 2.0",
+    "license_url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
+    "avatar": "https://avatars2.githubusercontent.com/u/801987?v=3&s=200"
+  },
+  {
+    "project": "Color Picker",
+    "authors": "JRummy Apps Inc.",
+    "url": "https://github.com/jrummyapps/colorpicker",
+    "year": 2016,
+    "license": "Apache Software License 2.0",
+    "license_url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
+    "avatar": "https://avatars3.githubusercontent.com/u/4860050?v=3&s=200"
+  },
+  {
+    "project": "DiscreteSeekBar",
+    "authors": "Gustavo Claramunt",
+    "url": "https://github.com/AnderWeb/discreteSeekBar",
+    "year": 2014,
+    "license": "Apache Software License 2.0",
+    "license_url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
+    "avatar": "https://avatars.githubusercontent.com/u/223713?v=3&s=200"
+  },
+  {
+    "project": "ElasticDragDismissLayout",
+    "authors": "Commit 451",
+    "url": "https://github.com/Commit451/ElasticDragDismissLayout",
+    "year": 2016,
+    "license": "Apache Software License 2.0",
+    "license_url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
+    "avatar": "https://avatars.githubusercontent.com/u/12497423?v=3&s=200"
+  },
+  {
+    "project": "EventBus",
+    "authors": "greenrobot",
+    "url": "https://github.com/greenrobot/EventBus",
+    "year": 2015,
+    "license": "Apache Software License 2.0",
+    "license_url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
+    "avatar": "https://avatars.githubusercontent.com/u/242242?v=3&s=200"
+  },
+  {
+    "project": "FastScroll-RecyclerView",
+    "authors": "Jared Rummler",
+    "url": "https://github.com/jaredrummler/FastScroll-RecyclerView",
+    "year": 2016,
+    "license": "Apache Software License 2.0",
+    "license_url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
+    "avatar": "https://avatars.githubusercontent.com/u/6203389?v=3&s=200"
+  },
+  {
+    "project": "JazzyListView",
+    "authors": "Two Toasters",
+    "url": "https://github.com/twotoasters/JazzyListView",
+    "year": 2015,
+    "license": "Apache Software License 2.0",
+    "license_url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
+    "avatar": "https://avatars.githubusercontent.com/u/112994?v=3&s=200"
+  },
+  {
+    "project": "KenBurnsView",
+    "authors": "Flávio Faria",
+    "url": "https://github.com/flavioarfaria/KenBurnsView",
+    "year": 2014,
+    "license": "Apache Software License 2.0",
+    "license_url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
+    "avatar": "https://avatars1.githubusercontent.com/u/1800351?v=3&s=200"
+  },
+  {
+    "project": "MaterialViewPager",
+    "authors": "Florent Champigny",
+    "url": "https://github.com/florent37/MaterialViewPager",
+    "year": 2015,
+    "license": "Apache Software License 2.0",
+    "license_url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
+    "avatar": "https://avatars0.githubusercontent.com/u/5754972?v=3&s=200"
+  },
+  {
+    "project": "Material Spinner",
+    "authors": "Jared Rummler",
+    "url": "https://github.com/jaredrummler/Material-Spinner",
+    "year": 2016,
+    "license": "Apache Software License 2.0",
+    "license_url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
+    "avatar": "https://avatars.githubusercontent.com/u/6203389?v=3&s=200"
+  },
+  {
+    "project": "Material Components for Android",
+    "authors": "Google",
+    "url": "https://github.com/material-components/material-components-android",
+    "license": "Apache Software License 2.0",
+    "license_url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
+    "avatar": "https://avatars1.githubusercontent.com/u/19478152?v=3&s=200"
+  },
+  {
+    "project": "Material Design Icons",
+    "authors": "Austin Andrews, Google Inc.",
+    "url": "https://materialdesignicons.com/",
+    "year": 2015,
+    "license": "Creative Commons 4.0",
+    "license_url": "https://raw.githubusercontent.com/google/material-design-icons/master/LICENSE",
+    "avatar": "https://avatars.githubusercontent.com/u/338885?v=3&s=200"
+  },
+  {
+    "project": "OkHttp",
+    "authors": "Square",
+    "url": "http://square.github.io/okhttp/",
+    "year": 2014,
+    "license": "Apache Software License 2.0",
+    "license_url": "https://raw.githubusercontent.com/square/okhttp/master/LICENSE.txt",
+    "avatar": "https://avatars.githubusercontent.com/u/82592?v=3&s=200"
+  },
+  {
+    "project": "Okio",
+    "authors": "Square",
+    "url": "https://github.com/square/okio",
+    "year": 2014,
+    "license": "Apache Software License 2.0",
+    "license_url": "https://raw.githubusercontent.com/square/okio/master/LICENSE.txt",
+    "avatar": "https://avatars.githubusercontent.com/u/82592?v=3&s=200"
+  },
+  {
+    "project": "PagerSlidingTabStrip",
+    "authors": "Andreas Stuetz",
+    "url": "https://github.com/jpardogo/PagerSlidingTabStrip",
+    "year": 2013,
+    "license": "Apache Software License 2.0",
+    "license_url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
+    "avatar": "https://avatars2.githubusercontent.com/u/1172221?v=3&s=200"
+  },
+  {
+    "project": "Picasso",
+    "authors": "Square",
+    "url": "http://square.github.io/picasso/",
+    "year": 2013,
+    "license": "Apache Software License 2.0",
+    "license_url": "https://raw.githubusercontent.com/square/picasso/master/LICENSE.txt",
+    "avatar": "https://avatars.githubusercontent.com/u/82592?v=3&s=200"
+  },
+  {
+    "project": "SmoothProgressBar",
+    "authors": "Antoine Merle",
+    "url": "https://github.com/castorflex/SmoothProgressBar",
+    "year": 2014,
+    "license": "Apache Software License 2.0",
+    "license_url": "https://raw.githubusercontent.com/castorflex/SmoothProgressBar/master/LICENSE.md",
+    "avatar": "https://avatars.githubusercontent.com/u/1364129?v=3&s=200"
+  }
+]

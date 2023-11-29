@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">BusyBox</string>
+  <string name="activity_busybox_installer">BusyBox</string>
+
+  <!-- RootCheck dialog -->
+  <eat-comment />
+  <string name="continue_text">Continue</string>
+  <string name="root_check_result_text">Root Check Result</string>
+  <string name="root_disabled_hint">You will not be able to properly use root apps unless your device is compatible, or unless it is rooted.</string>
+  <string name="root_check_hint">For more information on rooting your device, please download the Root Check App below.</string>
+  <string name="dialog_warning_text">WARNING</string>
+  <string name="this_device_is_not"><![CDATA[<strong>%s</strong> <font color="red">is not rooted</font>]]></string>
+  <string name="root_check_title">Root Check</string>
+  <string name="check_device_root_status_learn_more_about_root"><![CDATA[Check device root status & learn more about root]]></string>
+  <string name="dialog_message_not_rooted">In order for this app to work properly, your device must be rooted.</string>
+
+</resources>
